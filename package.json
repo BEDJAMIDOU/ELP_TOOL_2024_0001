@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "serveur_01102024.js",
   "scripts": {
-    "start": "node serveur_01102024.js",  // Ajoutez cette ligne pour démarrer votre serveur Node.js
+    "start": "node serveur_01102024.js",  
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
