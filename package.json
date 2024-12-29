@@ -1,7 +1,7 @@
 {
   "name": "elp-tool-v2024-001",
   "version": "1.0.0",
-  "main": "serveur_01102024.js.js",
+  "main": "serveur_01102024.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
