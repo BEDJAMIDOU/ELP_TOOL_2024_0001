@@ -1,7 +1,7 @@
 {
   "name": "elp-tool-v2024-001",
   "version": "1.0.0",
-  "main": "programme_principal_modele_electrogeometrique_ludique.js",
+  "main": "serveur_01102024.js.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
