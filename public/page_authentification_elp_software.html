@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("photos/arriere_plan_authentification.jpg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+
+
+            /*background-color: #f3f3f3;*/
+        }
+        
+        .container {
+            background: rgb(206, 218, 232);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 95%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 10px;
+            color: green;
+            font-size: 0.9em;
+        }
+        .error {
+            color: red;
+        }
+
+        .bande1 {
+            position: absolute;
+
+            width: 100%;
+            height: 100px;
+
+            background-color: rgb(16, 72, 98);
+            top: 0px;
+
+            box-shadow: 0px 4px 15px rgba(92, 92, 92, 0.5); /* Ombre */
+
+        }
+
+        .bande2 {
+            position: absolute;
+
+            width: 100%;
+            height: 100px;
+
+            background-color: rgb(16, 72, 98);
+            bottom: 0px;
+            box-shadow: 0px 4px 15px rgba(92, 92, 92, 0.5); /* Ombre */
+
+        }
+
+        .support-info {
+            position: absolute; /* Position relative à la fenêtre du navigateur */
+            bottom: 0px; /* Place le bloc à 10px du bas de la page */
+            left: 5px; /* Place le bloc à 10px du côté gauche */
+            background-color: rgb(16, 72, 98);
+            color: rgb(255, 255, 255); /* Couleur du texte */
+            padding: 10px; /* Espacement interne */
+            border-radius: 5px; /* Coins arrondis */
+            font-size: 14px; /* Taille du texte */
+            font-family: Arial, sans-serif; /* Police d'écriture */
+            max-width: 300px; /* Largeur maximale pour limiter la taille */
+            line-height: 0.5; /* Espacement entre les lignes */
+        }
+
+        .titre-logiciel {
+            position: absolute; /* Position relative à la fenêtre du navigateur */
+            bottom: 10px; /* Place le bloc à 10px du bas de la page */
+            right: 10px; /* Place le bloc à 10px du côté gauche */
+            background-color: rgb(16, 72, 98);
+            color: rgb(255, 255, 255); /* Couleur du texte */
+            padding: 5px; /* Espacement interne */
+            border-radius: 5px; /* Coins arrondis */
+            font-size: 20px; /* Taille du texte */
+            font-family: Arial, sans-serif; /* Police d'écriture */
+            max-width: 600px; /* Largeur maximale pour limiter la taille */
+            line-height: 0.4; /* Espacement entre les lignes */
+        }
+
+        .titre-licence {
+            position: absolute; /* Position relative à la fenêtre du navigateur */
+            top: 10px; /* Place le bloc à 10px du bas de la page */
+            left: 20px; /* Place le bloc à 10px du côté gauche */
+            background-color: rgb(16, 72, 98);
+            color: rgb(255, 255, 255); /* Couleur du texte */
+            padding: 5px; /* Espacement interne */
+            border-radius: 5px; /* Coins arrondis */
+            font-size: 20px; /* Taille du texte */
+            font-family: Arial, sans-serif; /* Police d'écriture */
+            max-width: 400px; /* Largeur maximale pour limiter la taille */
+            line-height: 0.5; /* Espacement entre les lignes */
+            z-index: 1; /* Placer en arrière-plan */
+        }
+
+        .logo-elp {
+            position: absolute; /* Position absolue pour placer précisément l'image */
+            top: 10px; /* Distance du haut */
+            right: 10px; /* Distance de la droite */
+            width: 200px; /* Taille ajustée (modifiable selon vos besoins) */
+            height: auto; /* Conserve les proportions de l'image */
+            z-index: 1; /* Placer en arrière-plan */
+        }
+
+        .logo-titre-logiciel {
+            position: absolute; /* Position absolue pour placer précisément l'image */
+            bottom: 25px; /* Distance du haut */
+            right: 400px; /* Distance de la droite */
+            width: 100px; /* Taille ajustée (modifiable selon vos besoins) */
+            height: auto; /* Conserve les proportions de l'image */
+            z-index: 1; /* Placer en arrière-plan */
+        }
+
+        .logo-version-logiciel {
+            position: absolute; /* Position absolue pour placer précisément l'image */
+            top: 25px; /* Distance du haut */
+            left: 150px; /* Distance de la droite */
+            width: 70px; /* Taille ajustée (modifiable selon vos besoins) */
+            height: auto; /* Conserve les proportions de l'image */
+            z-index: 1; /* Placer en arrière-plan */
+        }
+
+        .logo-support-technique {
+            position: absolute; /* Position absolue pour placer précisément l'image */
+            bottom: 20px; /* Distance du haut */
+            left: 270px; /* Distance de la droite */
+            width: 100px; /* Taille ajustée (modifiable selon vos besoins) */
+            height: auto; /* Conserve les proportions de l'image */
+        }
+
+
+        .icone_utilisateur {
+
+
+            padding:10px;
+            width: auto; /* Taille ajustée (modifiable selon vos besoins) */
+            height: 70px; /* Conserve les proportions de l'image */
+            left: 140%;
+            transform: translateX(140%);
+
+
+            
+        }
+
+
+
+
+
+
+
+
+    </style>
+    
+</head>
+<body>
+
+    <div class="bande1"></div>
+    <div class="bande2"></div>
+
+    <div class="container">
+
+
+        <div class="support-info">
+            <p>Support technique: +33 6 33 15 65 18</p>
+            <p><u>elp.expertise@gmail.com</u></p>
+            <p>Du lundi au vendredi de 8h à 18h</p>
+        </div>
+    
+    
+        <div class="titre-licence">
+            <p><FONT face ="Agency FB">ELP TOOL</FONT></p>
+            <p><FONT face ="Agency FB">Version 0024-01</FONT></p>
+    
+        </div>
+    
+        <div class="titre-logiciel">
+            <p><strong><FONT face ="Comic Sans MS" style="color:rgb(225, 255, 0);">LOGICIEL DE CALCUL</FONT></strong></p>
+            <p><strong><FONT face ="Comic Sans MS">PROTECTION CONTRE LA FOUDRE</FONT></strong></p>
+    
+        </div>
+    
+        <img src="photos/logo_elpbis1.png" class="logo-elp">
+        <img src="photos/arriere_plan_titre_logicielbis.png" class="logo-titre-logiciel">
+        <img src="photos/logo_support_techniquebis.png" class="logo-support-technique">
+        <img src="photos/arriere_plan_version_logiciellebis.png" class="logo-version-logiciel">
+    
+        <!--img src="photos/arriere_plan_be.png" class="image_be"-->
+        <!--img src="photos/extrait_arf.png" class="extrait_arf"-->
+        <!--img src="photos/extrait_calculs_divers.png" class="extrait_calculs_divers"-->
+    
+    
+    
+    
+        <div class="utilisateur_container">
+            <img src="photos/icone_utilisateurbis.png" class="icone_utilisateur">
+        </div>
+    
+    
+
+
+
+        <centre>
+            <h2><u>Authentification</u></h2>
+        </centre>
+        
+        <!-- Formulaire pour l'enregistrement -->
+        <form id="registration-form" onsubmit="return validateRegisterForm();">
+
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur <span style="color: red;">*</span> :</label>
+                <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe <span style="color: red;">*</span> :</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Nom complet <span style="color: red;">*</span> :</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Nom complet" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Courriel <span style="color: red;">*</span> :</label>
+                <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+            </div>
+            <div class="form-group">
+                <label for="organization">Organisation <span style="color: red;">*</span> :</label>
+                <input type="text" id="organization" name="organization" placeholder="Organisation" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Numéro de téléphone <span style="color: red;">*</span> :</label>
+                <input type="tel" id="phone" name="phone" placeholder="Numéro de téléphone" required>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <span style="color: red; font-size: 14px;">*</span>
+                    <span style="color: rgb(0, 0, 0); font-size: 14px;"><i>Champs obligatoires</i></span>
+                </label>
+            </div>
+
+
+
+            <!--div class="form-group">
+                <label for="recaptcha">Sécurité :</label>
+                <div class="g-recaptcha" data-sitekey="VOTRE_SITE_KEY"></div>
+            </div!-->
+            <button onclick="loginUser()">Soumettre</button>
+            <!--p class="message" id="register-message"></p!-->
+            <p class="message" id="login-message"></p>
+
+        </form>
+            
+            <div id="secure-data" style="display: none;">
+                <!--h3>Zone sécurisée</h3!-->
+                <p>Bienvenue ! Vous êtes connecté.</p>
+                <button onclick="accessProtectedData()">Afficher les données sécurisées</button>
+                <p id="protected-message"></p>
+            </div>
+            
+        
+        
+  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+
+        
+
+
+const API_BASE_URL = "http://localhost:3000"; // Remplacez par l'URL de votre serveur
+
+
+function validateRegisterForm() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const fullname = document.getElementById('fullname').value.trim();
+    const organization = document.getElementById('organization').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!username || !password || !fullname || !organization || !email || !phone) {
+        alert('Tous les champs obligatoires doivent être remplis.');
+        return false;
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        alert('Veuillez entrer une adresse e-mail valide.');
+        return false;
+    }
+
+    if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+        alert('Veuillez entrer un numéro de téléphone valide.');
+        return false;
+    }
+
+    // ReCAPTCHA validation logic (if applicable)
+    //const recaptchaResponse = grecaptcha.getResponse();
+    //if (!recaptchaResponse) {
+     //   alert('Veuillez vérifier que vous n\'êtes pas un robot.');
+     //   return false;
+    //}
+
+    return true; // Le formulaire est valide
+}
+
+// Fonction pour s'enregistrer
+async function registerUser() {
+
+    event.preventDefault(); // Empêche le rafraîchissement de la page
+
+    
+
+    if (!validateRegisterForm()) {
+
+        return;
+    }
+
+    
+    //const username = document.getElementById('register-username').value;
+    //const password = document.getElementById('register-password').value;
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const fullname = document.getElementById('fullname').value.trim();
+    const organization = document.getElementById('organization').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    
+
+    const data = {
+        username,
+        password,
+        fullname,
+        organization,
+        email,
+        phone
+    };
+
+    
+
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username,password,fullname,organization,email,phone})
+        });
+
+        
+
+        const result = await response.json();
+
+
+        const message = document.getElementById('register-message');
+
+        
+        if (response.ok) {
+
+
+            message.textContent = result.message;
+            message.className = "message";
+
+            
+            
+        } else {
+            message.textContent = result.message || "Erreur lors de l'enregistrement.";
+            message.className = "error";
+            
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Fonction pour se connecter
+async function loginUser() {
+
+    event.preventDefault(); // Empêche le rafraîchissement de la page
+
+
+    if (!validateRegisterForm()) {
+
+        return;
+    }
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const fullname = document.getElementById('fullname').value.trim();
+    const organization = document.getElementById('organization').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    
+
+    const data = {
+        username,
+        password,
+        fullname,
+        organization,
+        email,
+        phone
+    };
+
+    //const username = document.getElementById('login-username').value;
+    //const password = document.getElementById('login-password').value;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include', // Inclut les cookies dans la requête
+            body: JSON.stringify({ username,password,fullname,organization,email,phone }),
+
+        });
+
+        const result = await response.json();
+
+        const message = document.getElementById('login-message');
+
+        if (response.ok) {
+
+            message.textContent = "Connexion réussie.";
+            message.className = "message";
+
+            
+            // Stocker le token JWT pour les requêtes futures
+            //localStorage.setItem('token', data.token);
+
+
+           // window.location.href = '/application'; // Page de votre application
+           
+
+            // Montrer la zone sécurisée
+            //document.getElementById('login-form').style.display = 'none';
+            document.getElementById('registration-form').style.display = 'none';
+            document.getElementById('secure-data').style.display = 'block';
+        } else {
+
+            message.textContent = data.message || "Erreur lors de l'authentification!";
+            message.className = "error";
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
+async function refreshAccessToken() {
+    try {
+        const response = await fetch('/refresh', {
+            method: 'POST',
+            credentials: 'include', // Inclus les cookies dans la requête
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors du rafraîchissement du token');
+        }
+
+        const data = await response.json();
+        console.log('Nouveau token d\'accès:', data.accessToken);
+
+        // Stockez le nouveau token d'accès dans le frontend
+        localStorage.setItem('accessToken', data.accessToken);
+
+        return data.accessToken;
+    } catch (error) {
+        console.error('Erreur:', error.message);
+        // Optionnel : Redirigez vers la page de connexion en cas d'échec
+        window.location.href = '/login';
+    }
+}
+
+
+// Fonction pour accéder à une route sécurisée
+async function accessProtectedData() {
+    const message = document.getElementById('protected-message');
+    if (!message) {
+        console.error("Élément avec l'ID 'protected-message' introuvable.");
+        return;
+    }
+
+    try {
+
+
+        //const accessToken = localStorage.getItem('accessToken'); // Récupérer le token d'accès
+        // Effectue une requête vers /protected sans ajouter manuellement le token
+        const response = await fetch(`${API_BASE_URL}/protected`, {
+            method: 'GET',
+            credentials: 'include', // Inclut automatiquement les cookies dans la requête
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            message.textContent = "Accès autorisé, redirection...";
+            setTimeout(() => {
+                // Redirection vers /application
+                window.location.href = '/application'; // Les cookies sont automatiquement envoyés
+            }, 1000);
+        } else if (response.status === 401) {
+            message.textContent = "Authentification requise. Veuillez vous reconnecter.";
+            const newToken = await refreshAccessToken(); // Appel à la fonction de rafraîchissement
+            if (newToken) {
+                // Réessayer la requête avec le nouveau token
+                const retryResponse = await fetch(`${API_BASE_URL}/protected`, {
+                    method: 'GET',
+                    credentials: 'include', // Inclut automatiquement les cookies dans la requête
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (retryResponse.ok) {
+                    const data = await retryResponse.json();
+                    message.textContent = "Accès autorisé, redirection...";
+                    setTimeout(() => {
+                        window.location.href = '/application';
+                    }, 1000);
+                } else {
+                    message.textContent = "Erreur lors de l'accès aux données protégées après le rafraîchissement.";
+                }
+            } else {
+                message.textContent = "Échec du rafraîchissement du token. Veuillez vous reconnecter.";
+            }
+
+
+        } else {
+            message.textContent = data.message || "Erreur d'accès.";
+        }
+    } catch (err) {
+        console.error("Erreur lors de l'accès :", err);
+        message.textContent = "Impossible de se connecter au serveur. Veuillez réessayer plus tard.";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,4321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Sphère Fictive </title>
+
+    <style>
+
+       body {
+            
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #dddddd; /* Set background color to light gray */
+            overflow: hidden; /* Prevent scrolling */
+        } 
+ 
+        .container {
+ 
+
+            border: 0px solid #ffffff; /* Set background color to light gray */
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #dddddd; /* Set background color to light gray */
+            
+        }
+
+        #sceneContainer {
+            flex: 1; /* Take the remaining space */
+            width: 85vw;
+            height: 91.5vh;
+            background-color: #ffffff; /* Set background color to light gray */
+            overflow: hidden; /* Ensure no overflow */
+            float: right;
+            display: flex; /* Flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            border: 1px solid #ffffff;
+            border-radius:10px;
+        }
+
+        #item-list {
+            list-style-type: none;
+            padding: 10px;
+            margin: 5px;
+            margin-left: 10px; /* Ajouter une marge à gauche */
+            width: 14%;
+            margin-top: 5px; /* Add some margin at the top for spacing */
+            max-height: 305px; /* Maximum height of the container */
+            overflow: auto; /* Enable vertical scroll if content overflows */
+            background-color: #dddddd; /* Set background color to light gray */
+            border: 1px solid #ffffff;
+            border-radius:10px;
+            
+        }
+
+
+
+        #label-list {
+        margin-top: 10px; /* Espace entre item-list et label-list */
+        bottom: 0;
+        left: 5px;
+        margin-top: 5px; /* Add some margin at the top for spacing */
+        margin-left: 10px; /* Ajouter une marge à gauche */
+
+        width: 14%;
+        padding: 10px;   
+        max-height: 400px; /* Maximum height of the container */
+        overflow: auto; /* Enable vertical scroll if content overflows */
+        background-color: #dddddd; /* Set background color to light gray */
+        border: 1px solid #ffffff;
+        border-radius:10px;
+        }
+
+
+
+     
+
+        .select_field {
+
+        background-color: cornsilk;
+        color:blue;
+        width:200px;
+        font-size:14px;
+        border: 1px solid #ccc; /* Thin border */
+
+        }
+
+        #button-container {
+                    list-style-type: none;
+                    padding: 10px;
+                    margin: 5px;
+                    margin-left: 10px; /* Ajouter une marge à gauche */
+                    width: auto;
+                    margin-top: 5px; /* Add some margin at the top for spacing */
+                    max-height: 50px; /* Maximum height of the container */
+                    overflow: auto; /* Enable vertical scroll if content overflows */
+                    background-color: #dddddd; /* Set background color to light gray */
+                    border: 1px solid #ffffff;
+                    border-radius:10px;
+                    
+                }
+
+        #buttons {
+            
+            margin: 0px;
+            
+            position:relative
+            
+           
+        }
+
+
+        .item {
+        background-color: #9797978e;
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 15px;
+        cursor: pointer;
+        text-align: center;
+
+        }
+
+        .item:hover {
+            background-color: rgba(213, 216, 47,0.3); /* Semi-transparent yellow overlay */
+        }
+
+
+    /* Style the labels */
+    .label-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px;
+    color: white;
+
+    
+    }
+
+    
+    .label {
+            color: red; /* Change to red for visibility */
+            font-size: 40px; /* Increase size for visibility */
+            font-family: Arial, sans-serif;
+            background-color: rgba(255, 255, 255, 0.7); /* Light background */
+            padding: 5px; /* Increase padding */
+            border-radius: 3px;
+        }
+
+
+    
+
+    .label-list select {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px;
+    color: white
+    }
+
+    #data-container {
+
+        padding: 10px;
+        margin: 5px;
+        margin-left: 10px; /* Ajouter une marge à gauche */
+        width: 14%;
+        margin-top: 5px; /* Add some margin at the top for spacing */
+        max-height: 100px; /* Maximum height of the container */
+        overflow: auto; /* Enable vertical scroll if content overflows */
+        background-color: #dddddd; /* Set background color to light gray */
+        border: 1px solid #ffffff;
+        border-radius:10px;
+            
+    }
+
+    .label_input_field {
+        font-size:16px;
+    }
+       
+    
+    .selected {
+
+        background-color: #d5d82f;
+    }
+
+    .general-data-input {
+        width:200px;
+        height:20px;
+        padding:0px;
+        font-Size: 14px;
+        color:blue;
+        border:1px solid #dddddd;
+        background-Color:cornsilk;
+    }
+
+    .custom-button {
+            background-size: cover;
+            background-position: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #000000;
+            cursor: pointer;
+    }
+
+    .custom-button-1 {
+            background-image: url(" photos/nouveau_fichier.jpg");
+
+        }
+
+    .custom-button-2 {
+            background-image: url(" photos/open_file_arf.jpg");
+
+        }       
+
+    .custom-button-3 {
+            background-image: url(" photos/save.jpg");
+
+        }
+    
+
+
+    .custom-button-4 {
+            background-image: url(" photos/save_as.jpg");
+
+        }
+
+         .custom-button-5 {
+            background-image: url(" photos/print_definitions.jpg");
+
+        }
+
+        .custom-button-6 {
+            background-image: url(" photos/noeud.jpg");
+
+        }
+
+        .custom-button-7 {
+            background-image: url(" photos/line.jpg");
+
+        }
+
+        .custom-button-8 {
+            background-image: url(" photos/delete.jpg");
+
+        }
+
+        .custom-button-9 {
+            background-image: url(" photos/run_t.jpg");
+
+        }
+
+        .custom-button-10 {
+            background-image: url(" photos/cut.jpg");
+
+        }
+
+        .custom-button-11 {
+            background-image: url(" photos/duplicate.jpg");
+            background-size: cover;
+            background-position: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #000000;
+            cursor: pointer;
+        }
+
+        .custom-button-12 {
+            background-image: url(" photos/isometric_view_2.jpg");
+  
+        }
+
+        .custom-button-13 {
+            background-image: url(" photos/top_2.jpg");
+
+        }
+
+        .custom-button-14 {
+            background-image: url(" photos/front_2.jpg");
+
+        }
+
+        .custom-button-15 {
+            background-image: url(" photos/back_2.jpg");
+
+        }
+
+        .custom-button-16 {
+            background-image: url(" photos/left_2.jpg");
+
+        }
+
+        .custom-button-17 {
+            background-image: url(" photos/right_2.jpg");
+
+        }
+
+        .custom-button-18 {
+            background-image: url(" photos/selection.jpg");
+
+        }
+
+        .custom-button-19 {
+            background-image: url(" photos/zoom_in.jpg");
+
+        }
+
+        .custom-button-20 {
+            background-image: url(" photos/zoom_out.jpg");
+
+        }
+
+        .custom-button-21 {
+            background-image: url(" photos/run-2.jpg");
+
+        }
+
+        .custom-button-21.disabled {
+            background-image: url(" photos/run_disable.jpg");
+
+        }
+
+        .custom-button-22 {
+            background-image: url(" photos/run-3.jpg");
+   
+        }
+
+        .custom-button-23 {
+            background-image: url(" photos/settings.jpg");
+
+        } 
+
+        .custom-button-24 {
+            background-image: url(" photos/form.jpg");
+
+        }
+
+        .custom-button-25 {
+            background-image: url("photos/previous.jpg");
+  
+        }
+
+        .custom-button-25.disabled {
+            background-image: url("photos/previous_disabled.jpg");
+  
+        }
+
+        .custom-button-25.enabled {
+            background-image: url("photos/previous.jpg");
+  
+        }
+
+        .custom-button-26 {
+            background-image: url("photos/next.jpg");
+
+        }
+
+        .custom-button-26.disabled {
+            background-image: url("photos/next_disabled.jpg");
+
+        }
+
+        .custom-button-26.enabled {
+            background-image: url("photos/next.jpg");
+
+        }
+
+        .popup_settings {
+            position: fixed;
+            top: 60px;
+            right: 0;
+
+            background-color: rgb(201, 201, 201);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 400px; /* Set the width of the popup */
+            height: auto; /* Set the height of the popup */
+            display: none;
+            box-sizing: border-box; /* Include padding in width and height */
+            overflow: none; /* Add scroll if content overflows */
+
+            align-items: center;
+
+            
+        }
+
+        .popup_form {
+            position: fixed;
+            top: 60px;
+            left: 0;
+
+            background-color: rgb(201, 201, 201);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 500px; /* Set the width of the popup */
+            height: auto; /* Set the height of the popup */
+            display: none;
+            box-sizing: border-box; /* Include padding in width and height */
+            overflow: none; /* Add scroll if content overflows */
+
+            align-items: center;
+
+            
+        }
+
+                /* Styles for the title */
+                .popup-title {
+            margin: -20px -20px 20px;
+            padding: 10px 20px;
+            background-color:#000000;
+            color: white;
+            font-size: 15px;
+            text-align: left;
+
+        }
+
+        .overlay {
+                position: fixed;
+                top: 5%;
+                left: 0;
+                width: 0%;
+                height: 0%;
+                background-color: rgba(255, 255, 255,); /* Fully transparent */
+                display: none;
+                z-index: 999;
+        }
+
+        .color-picker-container {
+            display: flex;
+            justify-content: space-between; /* Pushes the label to the left and the input to the right */
+            align-items: center; /* Vertically aligns both the label and the input */
+            width: 100%; /* Ensure the container takes the full width of its parent */
+        }
+
+        .color-picker-container label {
+            margin-right: 10px; /* Optional: Add some space between the label and input */
+        }
+
+        
+        #data-container-settings {
+
+            padding: 10px;
+
+            width: 100%;
+            margin-top: 5px; /* Add some margin at the top for spacing */
+            max-height: 200px; /* Maximum height of the container */
+            overflow: none; /* Enable vertical scroll if content overflows */
+            background-color: #dddddd; /* Set background color to light gray */
+            border: 1px solid #ffffff;
+            border-radius:10px;
+            display: flex;
+            justify-content: space-between; /* Aligns label to the left and input to the right */
+            align-items: center; /* Vertically centers both label and input */
+               
+            
+        }
+
+        .custom-icon {
+            font-size: 10px; /* Taille réduite de l'icône */
+        }
+ 
+
+
+
+    </style>
+
+</head>
+<body>
+
+   
+
+    <div id="button-container">
+        
+            <!-- Buttons will be added here -->
+            <button class="custom-button custom-button-24"  title="Données générales" id="form"> </button> 
+            <button class="custom-button custom-button-1" title="Nouveau fichier" onclick="new_file()"> </button>
+            <button class="custom-button custom-button-2" title="Ouvrir un fichier" id="openShapesButton"> </button>
+            <input type="file" id="openShapes" style="display: none;">
+            <input type="file" id="ImportShapes" style="display: none;">
+            <button class="custom-button custom-button-3" title="Enregistrer" id="save" onclick="save()"> </button>
+            <button class="custom-button custom-button-4" title="Enregistrer sous" id="save_as" onclick="save_as()"> </button>
+            <button class="custom-button custom-button-25" title="précédent" id="previous" onclick="previous()"> </button>
+            <button class="custom-button custom-button-26" title="suivant" id="next" onclick="next()"> </button>
+            <button class="custom-button custom-button-5" title="Afficher les résultats" onclick="print_results()"> </button>
+            <button class="custom-button custom-button-6" title="Créer un noeud" id="sphere" onclick="structure_spherique()"> </button>
+            <button class="custom-button custom-button-7"  title="Activer la création des lignes" id="line" onclick="create_line()"> </button>
+            <button class="custom-button custom-button-8" title="retirer les résultats" id="delete" onclick="removeAllTextMeshes()"> </button>
+            <button class="custom-button custom-button-9"  title="Lancer le calcul" id="run" onclick="programme_principal()"> </button>
+            <button class="custom-button custom-button-10"   title="supprimer un object" onclick="delete_object()"> </button>
+            <button class="custom-button custom-button-11"   title="dupliquer un object" onclick="duplicate()"> </button>
+            <button class="custom-button custom-button-12"  title="vue isommétrique" onclick="isometric_view ()"> </button>
+            <button class="custom-button custom-button-13"  title="vue de dessus" onclick="top_view ()"> </button>
+            <button class="custom-button custom-button-14"  title="vue de face" onclick="front_view ()"> </button>
+            <button class="custom-button custom-button-15"  title="vue arrière" onclick="back_view ()"> </button>
+            <button class="custom-button custom-button-16"  title="vue de gauche" onclick="left_view ()"> </button>
+            <button class="custom-button custom-button-17"  title="vue de droite" onclick="right_view ()"> </button>
+            <button class="custom-button custom-button-18"   title="selectionner l'object" id="SelectObjectButton" onclick="selection ()"> </button>
+            <button class="custom-button custom-button-19"  title="zoom avant" onclick="zoom_in ()"> </button>
+            <button class="custom-button custom-button-20"  title="zoom arrière" onclick="zoom_out ()"> </button>
+            <button class="custom-button custom-button-21"  title="" id="sd_lignes" onclick="sd_lignes ()"> </button>
+            <button class="custom-button custom-button-23"  title="Paramètres" id="settings"> </button>
+        
+    </div>
+
+ 
+    <div class="container" id="sceneContainer">
+
+        
+        <div class="overlay" id="overlay-settings"></div>
+    
+        <div class="popup_settings" id="popup-settings">
+
+            <div class="popup-title">Paramètres</div>
+
+            <div class="container" id="data-container-settings">
+                <label for="resolution" class="label_input_field">Résolution (m) :</label>
+                <input type="range" style="width: 150px; height: 20px; background-color:cornsilk;color: blue; border: 1px solid #ccc" id="resolution" min="0.1" step="0.1" max="50" value="1">
+                <span id="resolution-value">1</span>
+            </div>
+           
+
+            <div class="container" id="data-container-settings">
+        
+                <label for="camera-position" class="label_input_field">Position de la caméra (m) :</label>
+               <input type="range" style="width: 100px; height: 20px; background-color:cornsilk;color: blue; border: 1px solid #ccc" id="camera-position" min="50" max="300" value="50">
+                <span id="camera-position-value">50</span>
+        
+            </div>
+
+            <div class="container" id="data-container-settings">
+
+                <div class="color-picker-container">
+                    <label for="Couleur_scene" class="label_input_field">Couleur de la scene :</label>
+                    <input type="color" id="Couleur_scene" style="width: 50px; height: 20px;" value="#000000">
+                </div>
+        
+            </div>
+
+
+            <div class="container" id="data-container-settings">
+
+                <div class="color-picker-container">
+                    <label for="Couleur_object" class="label_input_field">Couleur de la selection :</label>
+                    <input type="color" id="Couleur_object" style="width: 50px; height: 20px;" value="#00ff00">
+                </div>
+        
+            </div>
+
+
+            <div class="container" id="data-container-settings">
+
+                <div class="color-picker-container">
+                    <label for="Couleur_lignes" class="label_input_field">Couleur des lignes :</label>
+                    <input type="color" id="Couleur_lignes" style="width: 50px; height: 20px;" value="#ff00ff">
+                </div>
+        
+            </div>
+
+
+            <div class="container" id="data-container-settings">
+        
+                
+                <div class="color-picker-container">
+                    <label for="Couleur_resultats" class="label_input_field">Couleur des résultats :</label>
+                    <input type="color" id="Couleur_resultats" style="width: 50px; height: 20px;" value="#E3DB0D">
+                </div>
+
+        
+            </div>
+
+
+        </div>
+
+
+        <div class="overlay" id="overlay-form"></div>
+    
+        <div class="popup_form" id="popup-form">
+
+            <div class="popup-title">Données générales</div>
+           
+            <div class="container" id="data-container-settings"> 
+                <label for="nom_projet" class="label_input_field">Nom du projet:</label>
+                <input type="text" style="width: 250px; height: 20px; background-color:cornsilk;color: blue; border: 1px solid #ccc" id="nom_projet" style="color: blue;" value="Nom du projet">
+            </div>
+
+            <div class="container" id="data-container-settings"> 
+                <label for="nom_redacteur" class="label_input_field">Nom du rédacteur:</label>
+                <input type="text" style="width: 250px; height: 20px; background-color:cornsilk;color: blue; border: 1px solid #ccc" id="nom_redacteur" style="color: blue;" value="Nom et prénom">
+            </div>
+
+            <div class="container" id="data-container-settings"> 
+                <label for="nom_societe" class="label_input_field">Nom de la société:</label>
+                <input type="text" style="width: 250px; height: 20px; background-color:cornsilk;color: blue; border: 1px solid #ccc" id="nom_societe" style="color: blue;" value="Nom de la société">
+            </div>
+ 
+
+        </div>
+
+
+      
+    </div>
+
+
+    <div class="container" id="data-container">
+
+        <div>
+            <label class="label_input_field" id="niveau_protection">Niveau de protection requis</label>
+        </div>
+
+        <div>
+
+            <select class="select_field" id="niveau-protection">
+
+                <option value="1">Niveau I</option>
+                <option value="2">Niveau II</option>
+                <option value="3">Niveau III</option>
+                <option value="4">Niveau IV</option>
+
+        
+            </select>
+
+        </div>
+
+      
+    </div>
+
+
+    <div class="container" id="item-list">
+    
+    </div>
+
+
+    <div class="container" id="label-list">
+               
+    </div>
+
+
+<!-- Include the necessary dependencies -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.0.0/math.js"></script>
+<script src="OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+
+///////////////////////POPUP SETTINGS /////////////////////////////////////////
+const popup_settings = document.getElementById('popup-settings');
+const overlay_settings = document.getElementById('overlay-settings');
+let setting_apparition = false;
+
+// Fonction pour afficher la popup
+function showPopup_settings() {
+    popup_settings.style.display = "block";
+    overlay_settings.style.display = "block";
+    setting_apparition = true;
+}
+
+// Fonction pour masquer la popup
+function hidePopup_settings() {
+    popup_settings.style.display = "none";
+    overlay_settings.style.display = "none";
+    setting_apparition = false;
+}
+
+// Gestionnaire pour ouvrir la popup
+document.getElementById('settings').addEventListener('click', showPopup_settings);
+
+// Gestionnaire global pour détecter les clics hors de la popup
+document.addEventListener('click', function(event) {
+    if (setting_apparition && !popup_settings.contains(event.target) && event.target.id !== 'settings') {
+        hidePopup_settings();
+    }
+});
+
+// Gestionnaire pour fermer avec la touche Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape" && setting_apparition) {
+        hidePopup_settings();
+    }
+});
+
+//////////////////////////////////////////////////////////
+
+///////////////////////POPUP FORM /////////////////////////////////////////
+const popup_form = document.getElementById('popup-form');
+const overlay_form = document.getElementById('overlay-form');
+let form_apparition = false;
+
+// Fonction pour afficher la popup
+function showPopup_form() {
+    popup_form.style.display = "block";
+    overlay_form.style.display = "block";
+    form_apparition = true;
+}
+
+// Fonction pour masquer la popup
+function hidePopup_form() {
+    popup_form.style.display = "none";
+    overlay_form.style.display = "none";
+    form_apparition = false;
+}
+
+// Gestionnaire pour ouvrir la popup
+document.getElementById('form').addEventListener('click', showPopup_form);
+
+// Gestionnaire global pour détecter les clics hors de la popup
+document.addEventListener('click', function(event) {
+    if (form_apparition && !popup_form.contains(event.target) && event.target.id !== 'form') {
+        hidePopup_form();
+    }
+});
+
+// Gestionnaire pour fermer avec la touche Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape" && form_apparition) {
+        hidePopup_form();
+    }
+});
+
+//////////////////////////////////////////////////////////
+
+
+var Couleur_scene='#000000';
+
+document.getElementById('Couleur_scene').addEventListener('change', function() {
+    Couleur_scene = document.getElementById('Couleur_scene').value;
+    renderer.setClearColor(Couleur_scene, 1); // Updates the background color of the scene
+
+    saveState();
+});
+
+
+var Couleur_object='#00ff00';
+
+document.getElementById('Couleur_object').addEventListener('change', function() {
+    Couleur_object = document.getElementById('Couleur_object').value;
+
+    saveState();
+});
+
+var Couleurlignes='#ff00ff';
+
+document.getElementById('Couleur_lignes').addEventListener('change', function() {
+    Couleurlignes = document.getElementById('Couleur_lignes').value;
+    
+    
+    if (lines.length>=1) {
+
+        for (let i = 0; i < lines.length; i++) {
+
+            lines[i].material.color.set(Couleurlignes);
+
+
+        }
+
+    }
+
+    if (spheres.length>=1) {
+
+        for (let i = 0; i < spheres.length; i++) {
+
+            spheres[i].material.color.set(Couleurlignes);
+
+
+
+        }
+
+
+
+    }
+
+    saveState();
+});
+
+var couleur_resultats='#E3DB0D';
+
+document.getElementById('Couleur_resultats').addEventListener('change', function() {
+    couleur_resultats = document.getElementById('Couleur_resultats').value;
+    saveState();
+});
+
+var camera_position=100;
+
+document.getElementById('camera-position').addEventListener("input", function() {
+    document.getElementById('camera-position-value').textContent = this.value;
+    camera_position = parseFloat(this.value);
+    camera.position.set(camera_position, camera_position, camera_position);
+    camera.lookAt(0, 0, 0);
+    controls.update();
+    //saveState();
+});
+
+
+nomprojet='Projet N°';
+
+document.getElementById('nom_projet').addEventListener('change',function() {
+
+nomprojet = document.getElementById('nom_projet').value;
+
+saveState();
+
+});
+
+nomredacteur='Nom Prénom';
+
+document.getElementById('nom_redacteur').addEventListener('change',function() {
+
+nomredacteur = document.getElementById('nom_redacteur').value;
+
+saveState();
+
+});
+
+
+nomsociete='Nom de la société';
+document.getElementById('nom_societe').addEventListener('change',function() {
+
+nomsociete = document.getElementById('nom_societe').value;
+
+saveState();
+
+});
+
+
+
+
+function print_results() {
+
+    const newWindow = window.open('aaaaa', '_blank');
+
+    const newDoc = newWindow.document;
+
+    // Obtenir la date actuelle
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('fr-FR', {
+        Année: 'numeric',
+        Mois: 'long',
+        Jour: 'numeric'
+    });
+
+
+    const versionlogicielle='ELP-SD-02-08-01A';
+    const normeReference='NF EN 62305-3';
+
+    const niveau_protection = document.getElementById('niveau-protection').value;
+
+
+    const html = `
+    <html>
+    <head>
+        <title>CALCUL DE LA DISTANCE DE SEPARATION - ${''} </title>
+            <style>
+            @media print {
+                    @page {
+                        margin-left: 1cm;
+                        margin-right: 1cm;
+                        margin-top: 2cm;
+                        margin-bottom: 1cm;
+                    }
+                    body {
+                        margin: 0;
+                    }
+                    .page-number:after {
+                        content: counter(page);
+                    }
+                    .page-number {
+                        position: fixed;
+                        bottom: 0;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+
+                
+                /* Optional: Additional CSS styles for the output window */
+            </style>
+    </head>
+    <body>
+
+            <h3 style="text-decoration: underline;text-align: center;">DONNEES DE SORTIE LOGICIELLE</h3>
+            <p style="text-align: center">Version logicielle: <span style="color: blue;">${versionlogicielle}</p>
+            <p style="text-align: center">Nom du projet: <span style="color: blue;">${nomprojet}</p>
+
+            
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">DONNEES GENERALES</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <p>Date: <span style="color: blue;">${formattedDate}</span></p>
+            <p>Norme de référence: <span style="color: blue;">${normeReference}</span></p>
+            <p>Nom et prénom du rédacteur: <span style="color: blue;">${nomredacteur}</span></p>
+            <p>Nom de la société: <span style="color: blue;">${nomsociete}</span></p>
+            <p>Niveau de protection requis: <span style="color: blue;">${niveau_protection}</span></p>
+
+
+
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">NOEUDS SAISIS</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+
+            <div id="enterednodes-data-container"></div>
+
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">CONDUCTEURS SAISIS</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+ 
+            <div id="enteredlines-data-container"></div>
+
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">DISTANCES DE SEPARATION OBTENUES AUX NOEUDS "S"</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+
+            <div id="separationdistance-data-container"></div>
+
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">DISTANCES DE SEPARATION MAXIMALES OBTENUES AUX NOEUDS "S"</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+
+            <div id="maxseparationdistance-data-container"></div>
+
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+            <h4 style="margin: 0px 0;">DISTANCES DE SEPARATION AUX POINTS QUELCONQUES "S"</h4>  
+            <p style="margin: 0;">--------------------------------------------------------------------------------------------------------------</p>
+
+            <div id="maxseparationdistanceqq-data-container"></div>
+
+
+    
+    </body>
+    </html>
+    `;
+
+
+    newDoc.open();
+
+    newDoc.write(html);
+    newDoc.close();
+
+    newWindow.onload = function () {
+
+    const enterednodesdatacontainer = newDoc.getElementById('enterednodes-data-container');
+    const enteredlinesdatacontainer = newDoc.getElementById('enteredlines-data-container');
+    const separationdistancedatacontainer = newDoc.getElementById('separationdistance-data-container');
+    const maxseparationdistancedatacontainer = newDoc.getElementById('maxseparationdistance-data-container');
+    const maxseparationdistanceqqdatacontainer = newDoc.getElementById('maxseparationdistanceqq-data-container');
+
+
+    for (let i = 0; i < group_data_cube_float.length; i++) {
+
+            enterednodesdatacontainer.innerHTML += `
+            <h4 style="text-decoration: underline;">${group_data_cube[i].text_new_item}</h4>
+            <p style="margin: 0 10px 0 0; padding: 0;">Noeud énergisé (Oui/Non): <span style="color: blue;">${group_data_cube[i].prevVisible}</span></p>
+
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (X0): <span style="color: blue;">${group_data_cube_float[i].x0_1} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Y0): <span style="color: blue;">${group_data_cube_float[i].y0_1} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Z0): <span style="color: blue;">${group_data_cube_float[i].z0_1} m</span></p>
+
+            </div>
+
+
+        `;
+   
+
+    }
+
+    
+
+    for (let i = 0; i < linedata.length; i++) {
+
+            x1=linedata[i].point_depart.pointdepart_x;
+            y1=linedata[i].point_depart.pointdepart_y;
+            z1=linedata[i].point_depart.pointdepart_z;
+
+            x2=linedata[i].point_arrivee.pointarrivee_x;
+            y2=linedata[i].point_arrivee.pointarrivee_y;
+            z2=linedata[i].point_arrivee.pointarrivee_z;
+ 
+            enteredlinesdatacontainer.innerHTML += `
+            <h4 style="text-decoration: underline;">Ligne N°${i+1}</h4>
+
+            
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">Point de départ: <span style="color: blue;"></span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (X0): <span style="color: blue;">${x1} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Y0): <span style="color: blue;">${y1} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Z0): <span style="color: blue;">${z1} m</span></p>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">Point d'arrivée: <span style="color: blue;"></span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (X0): <span style="color: blue;">${x2} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Y0): <span style="color: blue;">${y2} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Centre (Z0): <span style="color: blue;">${z2} m</span></p>
+            </div>
+
+
+        `;
+    
+
+    }
+
+    
+    for (let i = 0; i < group_data_cube_float.length; i++) {
+
+        if (!V[i]===0) { 
+
+            separationdistancedatacontainer.innerHTML += `
+
+            <h4 style="text-decoration: underline;">Noeud énergisé: ${group_data_cube[i].text_new_item}:</h4>
+            `;
+
+        if (CG.length>0) {
+
+        for (let j = 0; j < group_data_cube_float.length; j++) {
+
+        separationdistancedatacontainer.innerHTML += `
+
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">${group_data_cube[j].text_new_item}:<span style="color: blue;"></span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">${(CG[i][j]*100).toFixed(2)} cm (Air) /</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">${(CG[i][j]*100*2).toFixed(2)} cm (Béton/Brique)</span></p>
+            </div>
+
+        `;
+
+        }
+
+        }
+
+        }
+
+
+    }
+
+    if (CG.length>0) {
+
+    for (let i = 0; i < group_data_cube_float.length; i++) {
+
+        maxseparationdistancedatacontainer.innerHTML += `
+
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">${group_data_cube[i].text_new_item}:<span style="color: blue;"></span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">${(C[i]*100).toFixed(2)} cm (Air) /</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">${(C[i]*100*2).toFixed(2)} cm (Béton/Brique)</span></p>
+            </div>
+            `;
+      
+
+
+    }
+
+    }
+
+    if (CG.length>0) {
+
+    for (let i = 0; i < sd_array.length; i++) {
+
+
+
+        x00=sd_array[i][0];
+        y00=sd_array[i][1];
+        z00=sd_array[i][2];
+        sd00=sd_array[i][3];
+        
+
+        maxseparationdistanceqqdatacontainer.innerHTML += `
+
+            <div style="display: flex; flex-wrap: wrap;">
+            <p style="margin: 0 10px 0 0; padding: 0;">Point N° ${i+1}:<span style="color: blue;"></span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">X0: <span style="color: blue;">${x00.toFixed(2)} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Y0: <span style="color: blue;">${y00.toFixed(2)} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;">Z0: <span style="color: blue;">${z00.toFixed(2)} m</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">s=${(sd00*100).toFixed(2)} cm (Air) /</span></p>
+            <p style="margin: 0 10px 0 0; padding: 0;"><span style="color: blue;">${(sd00*100*2).toFixed(2)} cm (Béton/Brique)</span></p>
+            </div>
+            `;
+     
+
+
+    }
+
+    }
+
+
+
+
+
+
+    //const figure = document.getElementById("sceneContainer").innerHTML;
+   
+    //scenecontainerdatacontainer.innerHTML = figure;
+
+    
+    newWindow.print();
+    const tempWindow = window.open('', '_blank', 'width=1,height=1');
+    tempWindow.blur(); // Perdre le focus de la fenêtre temporaire
+    window.focus(); // Revenir à la fenêtre principale
+    setTimeout(() => tempWindow.close(), 100); // Fermer la fenêtre temporaire
+
+
+
+}
+
+}
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////
+
+
+ 
+
+        var group_scene = new THREE.Group();
+        groups_data=[];
+        const originalColorsByGroup = new Map();
+        inputdata=null;
+        group_data_cube=[];
+        group_data_cube_float=[];
+        index=null;
+        var points=null;
+
+        let itemCounter_cube = 0;
+        let itemCounter_f = 0;
+        let itemCounter_cy = 0;
+        let itemCounter_cyh = 0;
+        let itemCounter_tsp = 0;
+        let itemCounter_tcy = 0;
+        let itemCounter_co = 0;
+        let itemCounter_sp = 0;
+        let itemCounter_pda = 0;
+        let itemCounter_pts = 0;
+        let itemCounter_ca = 0;
+        var currentView = null;//'perspective';
+        var currentView_1 =null; //'perspective';
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
+        //var rayon_p;
+        var Nombre_points=100;
+        var Rayon_p=20.;
+        let initialFov
+        let initialCameraPosition 
+        let initialCameraRotation
+        var snp=[];
+        var test_snp=0;
+        var sprites=[];
+
+
+        
+        
+        //////////////////////////////INTITIALISE THE SCENE//////////////////////////////////////////////////////
+
+        init();
+        
+
+        //var camera_position=50;
+
+        function init() {
+       
+            scene = new THREE.Scene();
+            camera_position=100.;
+            camera_position_z=50.;
+            currentView='perspective'
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth /window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(Couleur_scene, 1);
+            
+            camera.position.set(camera_position, camera_position, camera_position); // Default top view
+            camera.lookAt(0, 0, 0);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('sceneContainer').appendChild(renderer.domElement);
+
+            initialFov = camera.fov;
+            initialCameraPosition = camera.position.clone();
+            initialCameraRotation=camera.rotation.clone();
+        
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+            controls.reset();
+  
+
+    }
+
+    
+    ///////////////////////////////ADDED FOR VIEWS//////////////////////////////////////////////////////////
+
+        axes_creation ();
+        light_interraction ();
+        
+
+        ////////////////////////////////////////AXES CREATION/////////////////////////////////////////////////////
+
+    function axes_creation () {
+ 
+        var xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(100, 0, 0) // direction of the X-axis
+        ]);
+        var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+        var xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
+        group_scene.add(xAxis);
+        scene.add(xAxis);
+        xAxis.name = 'xAxis';
+
+        // Create line for Y-axis
+        var yAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0, 100, 0) // direction of the Y-axis
+        ]);
+        var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x006400 });
+        var yAxis = new THREE.Line(yAxisGeometry, yAxisMaterial);
+        group_scene.add(yAxis);
+        scene.add(yAxis);
+        yAxis.name = 'yAxis';
+
+        // Create line for Z-axis
+        var zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0, 0, 100) // direction of the Z-axis
+        ]);
+        var zAxisMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+        var zAxis = new THREE.Line(zAxisGeometry, zAxisMaterial);
+        group_scene.add(zAxis);
+        scene.add(zAxis);
+        zAxis.name = 'zAxis';
+
+    }
+    
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        function light_interraction () {
+        // Add ambient light
+        var ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        // Add directional light
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(1, 1, 1).normalize();
+        scene.add(directionalLight);
+
+        }
+
+
+
+    ///////////////////////////////////////////////ANIMATE FUNCTION//////////////////////////////////////////
+    function animate() {
+
+
+        requestAnimationFrame(animate);
+               
+        renderer.render(scene, camera);
+
+            
+        controls.update(); // Update controls continuously
+
+        controls.enabled=true;
+          
+
+
+    }
+
+
+        function top_view() {
+
+
+            controls.reset(); 
+            //cameraZ = new THREE.OrthographicCamera(-size * aspect, size * aspect, size, -size, near, far);
+            camera.position.set(0, camera_position, 0);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+
+        }
+
+                function front_view() {
+
+            controls.reset();          
+            camera.position.set(0, 0, camera_position);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+
+  
+        }
+
+
+        function back_view() {
+
+            controls.reset();            
+            camera.position.set(0, 0, -camera_position);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+
+        }
+
+
+        function left_view() {
+
+            controls.reset();            
+            camera.position.set(-camera_position, 0, 0);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+
+        }
+
+
+        function right_view() {
+           
+            controls.reset();
+            camera.position.set(camera_position, 0, 0);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+
+        }
+
+
+        // Function to switch to front view
+  
+        function isometric_view() {
+            controls.reset();
+            camera.position.set(camera_position, camera_position, camera_position);
+            camera.lookAt(0, 0, 0);
+            scene.rotation.set(0, 0, 0); // Reset scene rotation
+            renderer.render(scene, camera);
+        }
+
+        
+         function zoom_in() {
+
+            
+            if (currentView==='perspective') {
+
+  
+            camera.fov -= 5; // Decrease the field of view to zoom in
+            camera.updateProjectionMatrix(); // Update the camera's projection matrix
+
+            } else {
+
+                
+            var aspect = window.innerWidth / window.innerHeight;
+            var size = 5;
+            var near = -10;
+            var far = 10;
+            var zoomFactor = +5;
+
+            cameraX.left += zoomFactor * aspect;
+            cameraX.right -= zoomFactor * aspect;
+            cameraX.top -= zoomFactor;
+            cameraX.bottom += zoomFactor;
+            cameraX.updateProjectionMatrix();
+
+            cameraXM.left += zoomFactor * aspect;
+            cameraXM.right -= zoomFactor * aspect;
+            cameraXM.top -= zoomFactor;
+            cameraXM.bottom += zoomFactor;
+            cameraXM.updateProjectionMatrix();
+
+            cameraY.left += zoomFactor * aspect;
+            cameraY.right -= zoomFactor * aspect;
+            cameraY.top -= zoomFactor;
+            cameraY.bottom += zoomFactor;
+            cameraY.updateProjectionMatrix();
+
+            cameraYM.left += zoomFactor * aspect;
+            cameraYM.right -= zoomFactor * aspect;
+            cameraYM.top -= zoomFactor;
+            cameraYM.bottom += zoomFactor;
+            cameraYM.updateProjectionMatrix();
+
+            cameraZ.left += zoomFactor * aspect;
+            cameraZ.right -= zoomFactor * aspect;
+            cameraZ.top -= zoomFactor;
+            cameraZ.bottom += zoomFactor;
+            cameraZ.updateProjectionMatrix();
+
+                // Similar adjustments for cameraY and cameraZ if need
+
+                }
+
+
+
+            }
+        
+        
+        function zoom_out() {
+            
+            
+            if (currentView==='perspective') {
+  
+            camera.fov += 5; // Decrease the field of view to zoom in
+            camera.updateProjectionMatrix(); // Update the camera's projection matrix
+
+            } else {
+        
+            var aspect = window.innerWidth / window.innerHeight;
+            var size = 5;
+            var near = -10;
+            var far = 10;
+            var zoomFactor = +5;
+
+            cameraX.left -= zoomFactor * aspect;
+            cameraX.right += zoomFactor * aspect;
+            cameraX.top += zoomFactor;
+            cameraX.bottom -= zoomFactor;
+            cameraX.updateProjectionMatrix();
+
+            cameraXM.left -= zoomFactor * aspect;
+            cameraXM.right += zoomFactor * aspect;
+            cameraXM.top += zoomFactor;
+            cameraXM.bottom -= zoomFactor;
+            cameraXM.updateProjectionMatrix();
+
+            cameraY.left -= zoomFactor * aspect;
+            cameraY.right += zoomFactor * aspect;
+            cameraY.top += zoomFactor;
+            cameraY.bottom -= zoomFactor;
+            cameraY.updateProjectionMatrix();
+
+            cameraYM.left -= zoomFactor * aspect;
+            cameraYM.right += zoomFactor * aspect;
+            cameraYM.top += zoomFactor;
+            cameraYM.bottom -= zoomFactor;
+            cameraYM.updateProjectionMatrix();
+
+            cameraZ.left -= zoomFactor * aspect;
+            cameraZ.right += zoomFactor * aspect;
+            cameraZ.top += zoomFactor;
+            cameraZ.bottom -= zoomFactor;
+            cameraZ.updateProjectionMatrix();
+
+        // Similar adjustments for cameraY and cameraZ if need
+
+        }
+
+
+        }
+
+ 
+ 
+
+        sol()
+
+
+        var floor;
+       
+   
+        function sol() {
+            
+            var length_s=1000.0;
+            var width_s=1000.0;
+            var height_s=0.1;
+            var x_s=0.0;
+            var y_s=0.0;
+            var z_s=-0.1;
+            //var rotationAngle=0; //degré
+            //var rotationAngle=rotationAngle*Math.PI/180;
+            var cubeGeometry_s = new THREE.BoxGeometry(length_s,height_s,width_s);
+            var cubeMaterial_s = new THREE.MeshPhongMaterial({ transparent: true, opacity: 0 });
+            floor = new THREE.Mesh(cubeGeometry_s, cubeMaterial_s);
+            floor.position.set(x_s, z_s, y_s);
+            floor.userData.id='floor'
+            //floor.rotation.z=rotationAngle;
+
+            group_scene.add(floor);
+            
+            scene.add(floor);
+
+            renderer.render(scene, camera);
+
+            //document.addEventListener('click', onClick, false);
+
+            floor.name='floor';
+
+
+        }
+
+ 
+        function hideInputFields() {
+
+            
+        var labelsInputContainer = document.getElementById('label-list');
+
+        if (labelsInputContainer) {
+        labelsInputContainer.innerHTML = ''; // Clear the container
+
+        }
+
+
+        }
+
+
+        function show_input_fields (newItem,group,index){
+           
+        hideInputFields()
+     
+
+
+
+ 
+
+var labelsInputContainer = document.getElementById('label-list');
+var select = document.createElement("select");
+var select_2 = document.createElement("select");
+
+// Create and append label and input fields for cube dimensions
+var RenameLabelDiv = document.createElement('div');
+var RenameLabel = document.createElement('label');
+RenameLabel.textContent = 'Renommer:';
+RenameLabel.style.display = 'block'; // Ensure label is on its own line
+RenameLabelDiv.appendChild(RenameLabel);
+var RenameInput = document.createElement('input');
+RenameInput.type = 'text';
+//widthInput.style.marginLeft = '150px';
+RenameInput.placeholder = 'Nom de la structure';
+RenameInput.value = group_data_cube[index].text_new_item;
+//widthInput.style.marginLeft = '50px';
+RenameInput.style.color = 'blue'; // Set text color to blue
+RenameInput.style.display = 'block'; // Ensure label is on its own line
+RenameInput.style.width = '200px'; // Set width
+RenameInput.style.height = '20px'; // Set width
+RenameInput.style.padding = '0px'; // Adjust padding to match select
+RenameInput.style.border = '1px solid #ccc'; // Match border style
+RenameInput.style.fontSize = '14px'; // Match font size
+RenameInput.style.boxSizing = 'border-box'; // Include padding and border in the width
+RenameInput.style.backgroundColor='cornsilk';
+RenameInput.addEventListener('input', updateCubeDimensions);
+RenameInput.addEventListener('input', saveState);
+
+RenameLabelDiv.appendChild(RenameInput);
+labelsInputContainer.appendChild(RenameLabelDiv);
+
+var RadiusLabelDiv = document.createElement('div');
+var RadiusLabel = document.createElement('label');
+RadiusLabel.textContent = 'Taille du point:  ';
+RadiusLabel.style.display = 'block'; // Ensure label is on its own line
+RadiusLabelDiv.appendChild(RadiusLabel);
+var RadiusInput = document.createElement('input');
+RadiusInput.type = 'number';
+//widthInput.style.marginLeft = '150px';
+RadiusInput.placeholder = 'Saisir la valeur';
+RadiusInput.value = group_data_cube[index].prevRadius; 
+//widthInput.style.marginLeft = '50px';
+RadiusInput.style.color = 'blue'; // Set text color to blue
+RadiusInput.style.display = 'block'; // Ensure label is on its own line
+RadiusInput.style.width = '200px'; // Set width
+RadiusInput.style.height = '20px'; // Set width
+RadiusInput.style.padding = '0px'; // Adjust padding to match select
+RadiusInput.style.border = '1px solid #ccc'; // Match border style
+RadiusInput.style.fontSize = '14px'; // Match font size
+RadiusInput.style.boxSizing = 'border-box'; // Include padding and border in the width
+RadiusInput.style.backgroundColor='cornsilk';
+RadiusInput.step = '0.1'; // Par exemple, pour un pas de 0.1
+RadiusInput.addEventListener('change', updateCubeDimensions);
+RadiusInput.addEventListener('change', saveState);
+RadiusLabelDiv.appendChild(RadiusInput);
+labelsInputContainer.appendChild(RadiusLabelDiv);
+
+// Create and append label and input fields for cube position
+var xLabelDiv = document.createElement('div');
+var xLabel = document.createElement('label');
+xLabel.textContent = 'Origine X0 (m):';
+xLabel.style.display = 'block'; // Ensure label is on its own line
+xLabelDiv.appendChild(xLabel);
+var xInput = document.createElement('input');
+xInput.type = 'number';
+xInput.placeholder = 'Entrer la valeur';
+xInput.value =group_data_cube[index].prevPosX ;
+xInput.style.color = 'blue'; // Set text color to blue
+xInput.style.display = 'block'; // Ensure label is on its own line
+xInput.style.width = '200px'; // Set width
+xInput.style.height = '20px'; // Set width
+xInput.style.padding = '0px'; // Adjust padding to match select
+xInput.style.border = '1px solid #ccc'; // Match border style
+xInput.style.fontSize = '14px'; // Match font size
+xInput.style.boxSizing = 'border-box'; // Include padding and border in the width
+xInput.style.backgroundColor='cornsilk';
+xInput.addEventListener('change', updateCubeDimensions);
+xInput.addEventListener('change', saveState);
+//xInput.style.marginLeft = '50px';
+xLabelDiv.appendChild(xInput);
+labelsInputContainer.appendChild(xLabelDiv);
+
+var yLabelDiv = document.createElement('div');
+var yLabel = document.createElement('label');
+yLabel.textContent = 'Origine Y0 (m):';
+yLabel.style.display = 'block'; // Ensure label is on its own line
+yLabelDiv.appendChild(yLabel);
+var yInput = document.createElement('input');
+yInput.type = 'number';
+yInput.placeholder = 'Entrer la valeur';
+yInput.value = group_data_cube[index].prevPosY;
+yInput.style.color = 'blue'; // Set text color to blue
+yInput.style.display = 'block'; // Ensure label is on its own line
+yInput.style.width = '200px'; // Set width
+yInput.style.height = '20px'; // Set width
+yInput.style.padding = '0px'; // Adjust padding to match select
+yInput.style.border = '1px solid #ccc'; // Match border style
+yInput.style.fontSize = '14px'; // Match font size
+yInput.style.boxSizing = 'border-box'; // Include padding and border in the width
+yInput.style.backgroundColor='cornsilk';
+yInput.addEventListener('change', updateCubeDimensions);
+yInput.addEventListener('change', saveState);
+//yInput.style.marginLeft = '50px';
+yLabelDiv.appendChild(yInput);
+labelsInputContainer.appendChild(yLabelDiv);
+
+var zLabelDiv = document.createElement('div');
+var zLabel = document.createElement('label');
+zLabel.textContent = 'Origine Z0 (m):';
+zLabel.style.display = 'block'; // Ensure label is on its own line
+zLabelDiv.appendChild(zLabel);
+var zInput = document.createElement('input');
+zInput.type = 'number';
+zInput.placeholder = 'Entrer la valeur';
+zInput.value = group_data_cube[index].prevPosZ;
+zInput.style.color = 'blue'; // Set text color to blue
+zInput.style.display = 'block'; // Ensure label is on its own line
+zInput.style.width = '200px'; // Set width
+zInput.style.height = '20px'; // Set width
+zInput.style.padding = '0px'; // Adjust padding to match select
+zInput.style.border = '1px solid #ccc'; // Match border style
+zInput.style.fontSize = '14px'; // Match font size
+zInput.style.boxSizing = 'border-box'; // Include padding and border in the width
+zInput.style.backgroundColor='cornsilk';
+zInput.addEventListener('change', updateCubeDimensions);
+zInput.addEventListener('change', saveState);
+//zInput.style.marginLeft = '50px';
+zLabelDiv.appendChild(zInput);
+labelsInputContainer.appendChild(zLabelDiv);
+
+var visibleLabelDiv = document.createElement('div');
+var visibleLabel = document.createElement('label');
+visibleLabel.textContent = 'Noeud Energisé:';
+visibleLabelDiv.appendChild(visibleLabel);
+
+visibleLabelDiv.appendChild(document.createElement('br')); // Adding a line break
+
+var option1 = document.createElement('option');
+option1.value='Oui';
+option1.textContent='Oui';
+select.appendChild(option1);
+select.style.color = 'blue'; // Set text color to blue
+var option2 = document.createElement('option');
+option2.value='Non';
+option2.textContent='Non';
+select.appendChild(option2);
+select.style.width = '200px'; // Set width
+select.style.height = '20px'; // Set width
+select.style.padding = '0px'; // Adjust padding to match select
+select.style.border = '1px solid #ccc'; // Match border style
+select.style.fontSize = '14px'; // Match font size
+select.style.boxSizing = 'border-box'; // Include padding and border in the width
+select.style.backgroundColor='cornsilk';
+
+select.style.color = 'blue'; // Set text color to blue
+//select.style.width = '200px'; // You can adjust this value as needed
+if (group_data_cube[index].prevVisible==='Oui') {
+    option1.selected=true;
+    
+} else {
+
+    option2.selected=true;
+    
+}
+
+select.addEventListener('change', updateCubeDimensions);
+select.addEventListener('change', saveState);
+
+visibleLabelDiv.appendChild(select);
+labelsInputContainer.appendChild(visibleLabelDiv);
+
+
+
+
+
+
+
+
+        xInput.dispatchEvent(new Event('input'));
+  
+
+
+  
+     
+    function updateCubeDimensions() {
+
+        
+
+        test_snp=0;
+
+        
+
+
+
+        
+       
+        
+
+
+///////////////////////////////////////////////////////STRUCTURE CONIQUE///////////////////////////////////////////////////
+
+sphere=spheres[index];
+
+textinput=document.getElementById('label-list').querySelectorAll('input')[0].value;
+text_new_item=document.getElementById('label-list').querySelectorAll('input')[0].value;
+Rayon = parseFloat(document.getElementById('label-list').querySelectorAll('input')[1].value);
+prevRadius=document.getElementById('label-list').querySelectorAll('input')[1].value;
+x0_1 = parseFloat(document.getElementById('label-list').querySelectorAll('input')[2].value);
+prevPosX=document.getElementById('label-list').querySelectorAll('input')[2].value
+y0_1 = parseFloat(document.getElementById('label-list').querySelectorAll('input')[3].value);
+prevPosY=document.getElementById('label-list').querySelectorAll('input')[3].value
+z0_1 = parseFloat(document.getElementById('label-list').querySelectorAll('input')[4].value);
+prevPosZ=document.getElementById('label-list').querySelectorAll('input')[4].value;
+prevVisible=select.value;
+
+group_name='sphere';
+sphere.name = 'sphere';
+
+if (Rayon<=0 ||
+    textinput=='' ||
+    isNaN(Rayon) || 
+    isNaN(x0_1) ||
+    isNaN(y0_1) ||                
+    isNaN(z0_1) ||
+    z0_1<=0
+    
+) {
+
+    alert("Insérer une entrée valide");
+
+    return
+
+    } 
+
+    var sphereGeometry = new THREE.SphereGeometry(Rayon, 64, 64);
+    sphere.position.set(x0_1, z0_1, y0_1);
+    sphere.geometry.dispose();
+    sphere.geometry=sphereGeometry
+    //scene.add(cone);
+    var selectedValue=select.value;
+ 
+    // Positionner le sprite près de la sphère
+    sprites[index].position.set(x0_1, z0_1 + 1, y0_1); // Ajustez la position du label
+    sprites[index].scale.set(2, 2, 1); // Ajuster la taille du sprite
+    
+    if (selectedValue==='Oui') {
+
+        sprites[index].visible=true;
+
+        
+    //sphere.visible=true;
+
+    } else {
+
+        sprites[index].visible=false;
+
+
+    }
+
+    
+
+    x0_11=group_data_cube_float[index].x0_1
+    y0_11=group_data_cube_float[index].y0_1
+    z0_11=group_data_cube_float[index].z0_1
+
+    if (!(x0_11===x0_1 && y0_11===y0_1 && z0_11===z0_1)) {
+
+        removelines(spheres[index]);
+        removeAllTextMeshes();
+
+
+
+  
+    }
+
+    newItem.textContent = textinput;
+
+    group_data_cube[index]={text_new_item,prevRadius,prevPosX,prevPosY,prevPosZ,prevVisible,index};
+    group_data_cube_float[index]={group_name,Rayon,x0_1,y0_1,z0_1};
+    spheres[index]=sphere;
+
+    //saveState();
+
+    
+
+
+/////////////////////////////////////////////STRUCTURE SPHERIQUE///////////////////////////////////////////
+
+
+
+        }
+
+
+
+
+
+       
+
+
+
+    }
+
+
+    ///////////////////////////////BOUTON STRUCTURE CUBIQUE//////////////////////////////////////////////////////////////////
+
+
+ 
+
+////////////////////////////////BOUTON STRUCTURE SPHERIQUE//////////////////////////////////////////////////////////////
+function structure_spherique(){
+
+structure_spherique_1 ('0.5','0','0','10',Couleurlignes,0.0,'Non',0);
+
+}
+
+////////////////////////////////BOUTON STRUCTURE SPHERIQUE//////////////////////////////////////////////////////////////
+
+///////////////////////////////CREATION STRUCTURE SPHERIQUE/////////////////////////////////////////////////////////////
+
+spheres=[];
+
+function structure_spherique_1 (prevRadius, prevPosX, prevPosY, prevPosZ, prevColor, offset_g,prevVisible,index0) {
+
+    
+hideInputFields();
+
+removeAllTextMeshes();
+
+const itemList_sphere = document.getElementById('item-list');
+itemList_sphere.addEventListener('click', handleItemClick);
+const newItem_sphere = document.createElement('li');
+document.addEventListener('keydown', handleKeyPress);
+newItem_sphere.className = 'item';
+itemList_sphere.appendChild(newItem_sphere);
+
+
+if (shape_creation===true) {
+                
+    newItem_sphere.textContent=group_data_cube[index0].text_new_item;
+} else if (shape_duplicate==true) {
+                                        
+    newItem_sphere.textContent='Copie '+group_data_cube[index0].text_new_item;
+                                        
+} else {
+                                        
+    newItem_sphere.textContent = 'Noeud N° ' + (itemCounter_sp+1);
+                                        
+}
+
+
+text_new_item=newItem_sphere.textContent;
+
+Rayon=parseFloat(prevRadius);
+x0_1 = parseFloat(prevPosX);
+y0_1 = parseFloat(prevPosY);
+z0_1 = parseFloat(prevPosZ);
+
+var sphereGeometry = new THREE.SphereGeometry(Rayon, 32, 32);
+var sphereMaterial = new THREE.MeshPhongMaterial({ color: prevColor });
+var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+sphere.position.set(x0_1+offset_g, z0_1, y0_1+offset_g);
+
+groups_data.push({newItem:newItem_sphere,group:sphere});
+
+const index = groups_data.findIndex(group => group.newItem === newItem_sphere);
+
+scene.add(sphere);
+
+sphere.name='sphere';
+
+group_name='sphere';
+
+group_data_cube[index]={text_new_item,prevRadius,prevPosX,prevPosY,prevPosZ,prevVisible,index};
+group_data_cube_float[index]={group_name,Rayon,x0_1,y0_1,z0_1};
+spheres[index]=sphere;
+node_lines[spheres[index].id]=[];
+
+if (saveState_test === false && shape_creation === false) {
+
+    saveState();
+
+}
+ 
+
+            
+
+
+
+
+       // Créer un canvas pour dessiner le label "I"
+       var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        canvas.width = 256;
+            canvas.height = 256;
+            context.font = 'Bold 150px Arial';
+            context.fillStyle = 'rgba(0, 255, 251, 1.0)'; // Couleur du texte (rouge)
+            context.fillText('E', 75, 175);
+
+            // Utiliser le canvas comme texture pour un sprite
+            var texture = new THREE.CanvasTexture(canvas);
+            var spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            var sprite = new THREE.Sprite(spriteMaterial);
+
+            // Positionner le sprite près de la sphère
+            sprite.position.set(x0_1, z0_1+1, y0_1); // Ajustez la position du label
+            sprite.scale.set(2, 2, 1); // Ajuster la taille du sprite
+
+            // Ajouter le sprite à la scène
+            scene.add(sprite);
+            sprites.push(sprite);
+
+
+if (prevVisible==='Oui') {
+
+    sprite.visible=true;
+
+
+   //sphere.visible=true;
+
+} else {
+
+    sprite.visible=false;
+
+//sphere.visible=false;
+
+}
+
+
+itemCounter_sp++;
+
+
+
+}
+
+///////////////////////////////CREATION STRUCTURE SPHERIQUE/////////////////////////////////////////////////////////////
+
+
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////SAVE SHAPES////////////////////////////////////////////////////////////////////
+
+save_index=0;
+save_group_data_cube=[];
+save_group_data_cube_float=[];
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        
+
+        selectedItem_2=null;
+
+        
+
+        function handleItemClick(event) {
+        const selectedItem = event.target;
+
+
+
+
+        //const index=groups_data.findInex(group)
+        const index = groups_data.findIndex(group => group.newItem === selectedItem);
+
+
+        //const {group,newItem}=groups_data[index];
+
+
+        if (index>=0 && index < groups_data.length) {
+
+ 
+        
+//        const A=group_data_cube[index];
+
+        const {group,newItem}=groups_data[index];
+
+      
+
+        show_input_fields (selectedItem,group,index);
+
+
+
+        renderer.domElement.addEventListener('click', function() {
+        onMouseClick(index,selectedItem,group,Couleurlignes); // Pass the index as an argument to handleItemClick
+    });
+
+        
+
+       if (selectedItem.classList.contains('selected')) {
+        //selectedItem.classList.add('selected');
+
+ 
+            show_input_fields (selectedItem,group,index);
+   
+            
+     } else {
+
+
+        const selectedItems = document.querySelectorAll('.selected');
+
+        selectedItems.forEach(item => {
+        item.classList.remove('selected');
+        });
+
+            selectedItem.classList.add('selected');
+           
+            
+        if (selectedItem_2 && selectedItem_2!==selectedItem) {
+
+
+            selectedItem_2.classList.remove('selected');
+            const index_2 = groups_data.findIndex(group => group.newItem === selectedItem_2);
+
+            if (index_2==-1){
+
+                return
+
+
+            }
+            const {group,item}=groups_data[index_2];
+
+
+            originalColor=Couleurlignes;
+
+            spheres[index_2].material.color.set(originalColor); // set original color
+            
+
+        }
+
+            selectedItem_2=selectedItem;
+
+            show_input_fields (selectedItem,group,index);
+
+            for (let i = 0; i < spheres.length; i++) {
+
+                spheres[i].material.color.set(Couleurlignes);
+            }
+
+            
+
+            spheres[index].material.color.set(Couleur_object); // Set highlight color
+
+            index_x[0]=index;
+
+        }
+
+    }
+    
+
+    }
+   
+
+
+    function onMouseClick(index,selectedItem,group) {
+
+
+
+        hideInputFields();
+
+        const selectedItems = document.querySelectorAll('.selected');
+
+        // Loop through each selected item and remove the "selected" class
+        selectedItems.forEach(item => {
+        item.classList.remove('selected');
+       
+
+        });
+
+        spheres.forEach(sphere => {
+        sphere.material.color.set(Couleurlignes); 
+       
+
+        });
+   
+      //  if (spheres[index]) {
+      //      spheres[index].material.color.set(Couleurlignes); // Set original color
+     //   }
+
+
+    
+  //  if (intersect_object_line) {
+                
+   //     intersect_object_line.material.color.set(Couleurlignes);
+
+  //  }
+
+
+    lines.forEach(line => {
+        line.material.color.set(Couleurlignes); 
+       
+
+        });
+
+
+
+
+   
+    renderer.domElement.removeEventListener('click',onMouseClick);
+
+
+
+    
+            
+}
+
+
+
+        // Function to handle item selection and deletion
+        function handleKeyPress(event) {
+        const selectedItem = document.querySelector('#item-list .selected');
+
+        if (event.key === 'Delete') {
+
+            if (intersect_object_line) {
+
+                
+                const index = lines.indexOf(intersect_object_line);
+                
+
+                if (index > -1) {
+
+                    //aa=linedata[index].point_depart.pointdepart_z;
+                    //bb=linedata[index].point_arrivee.pointarrivee_z;
+                
+                    textMeshTRemove(lines[index]);
+                    removeAllTextMeshes();
+              
+
+                    //lines.splice(index, 1); // Retirer la ligne du tableau des lignes
+
+                    //linedata.splice(index, 1);
+                    //scene.remove(intersect_object_line);
+
+                }
+
+
+
+            } else if (selectedItem) {
+
+            document.getElementById('sceneContainer').removeEventListener('click', handleMouseClick);
+
+            counter_regle=false;
+
+            points_m = [];
+            startPoint = null;
+            endPoint = null;
+
+            var button = document.getElementById('line');
+            button.title="Activer la création de lignes"
+
+            const index = groups_data.findIndex(group => group.newItem === selectedItem);
+            const {group,newItem}=groups_data[index];
+
+            removePoint(spheres[index]);
+
+            selectedItem.remove();
+          
+            removePoint(spheres[index]);
+            removeAllTextMeshes();
+ 
+            //textMeshTRemove(group_data_cube_float[index].x0_1,group_data_cube_float[index].y0_1);
+                 
+            groups_data.splice(index, 1);
+            group_data_cube.splice(index,1);
+            group_data_cube_float.splice(index,1);
+            sprites.splice(index,1);
+            spheres.splice(index, 1);
+
+            saveState();
+
+            itemCounter_sp=itemCounter_sp-1;
+
+            removeAllTextMeshes();
+           
+            selectedItem_2=null;
+    
+            hideInputFields();
+  
+            return selectedItem_2;
+
+            
+
+        }
+
+
+
+
+        }
+
+  
+    }
+
+
+    function delete_object () {
+        const selectedItem = document.querySelector('#item-list .selected');
+
+
+            if (intersect_object_line) {
+
+                
+                const index = lines.indexOf(intersect_object_line);
+                
+
+                if (index > -1) {
+
+                
+                    textMeshTRemove(lines[index]);
+                    removeAllTextMeshes();
+
+                }
+
+
+
+            } else if (selectedItem) {
+
+            document.getElementById('sceneContainer').removeEventListener('click', handleMouseClick);
+
+            counter_regle=false;
+
+            points_m = [];
+            startPoint = null;
+            endPoint = null;
+
+            var button = document.getElementById('line');
+            button.title="Activer la création de lignes"
+
+            const index = groups_data.findIndex(group => group.newItem === selectedItem);
+            const {group,newItem}=groups_data[index];
+
+            
+
+            selectedItem.remove();
+
+            
+
+            removePoint(spheres[index]);
+            //removeAllTextMeshes();
+                 
+            groups_data.splice(index, 1);
+            group_data_cube.splice(index,1);
+            group_data_cube_float.splice(index,1);
+            sprites.splice(index,1);
+            spheres.splice(index, 1);
+
+            
+
+            itemCounter_sp=itemCounter_sp-1;
+
+            removeAllTextMeshes();
+           
+            selectedItem_2=null;
+    
+            hideInputFields();
+  
+            return selectedItem_2;
+
+            
+
+            
+
+        }
+
+        saveState();
+
+  
+    }
+
+
+    ////////////////////////////////////////////ruler to measure distance///////////////////////////
+
+    let startPoint = null;
+    let endPoint = null;
+
+   
+    let points_m = [];
+    let line;
+    let point1Mesh;
+    let point2Mesh;
+    let floor_1=0;
+    let floor_2=0;
+    let linedata=[];
+    index_test=-1;
+    index_test_v=[-1,-1];
+    node_lines={};
+    lines = []; // Tableau pour stocker toutes vos lignes
+
+    function createLine() {
+
+
+    if (points_m.length===2) {
+
+
+        document.addEventListener('keydown', handleKeyPress);
+
+        pointdepart_x=points_m[0].x;
+        pointdepart_y=points_m[0].z;
+        pointdepart_z=points_m[0].y;
+        index_test_v0=index_test_v[0];
+        index_test_v1=index_test_v[1];
+
+        point_depart={pointdepart_x,pointdepart_y,pointdepart_z,index_test_v0};
+
+        pointarrivee_x=points_m[1].x;
+        pointarrivee_y=points_m[1].z;
+        pointarrivee_z=points_m[1].y;
+
+        point_arrivee={pointarrivee_x,pointarrivee_y,pointarrivee_z,index_test_v1};
+
+        distance=Math.sqrt(Math.pow(pointarrivee_x-pointdepart_x,2)+Math.pow(pointarrivee_y-pointdepart_y,2)+Math.pow(pointarrivee_z-pointdepart_z,2));
+        textmesh=null;
+        point={point_depart,point_arrivee,distance,textmesh};
+
+        linedata_test=linedata.some(point => 
+            (point.point_depart.pointdepart_x === pointdepart_x &&
+            point.point_depart.pointdepart_y === pointdepart_y &&
+            point.point_depart.pointdepart_z === pointdepart_z &&
+            point.point_arrivee.pointarrivee_x === pointarrivee_x &&
+            point.point_arrivee.pointarrivee_y === pointarrivee_y &&
+            point.point_arrivee.pointarrivee_z === pointarrivee_z) ||
+
+            (point.point_depart.pointdepart_x === pointarrivee_x &&
+            point.point_depart.pointdepart_y === pointarrivee_y &&
+            point.point_depart.pointdepart_z === pointarrivee_z &&
+            point.point_arrivee.pointarrivee_x === pointdepart_x &&
+            point.point_arrivee.pointarrivee_y === pointdepart_y &&
+            point.point_arrivee.pointarrivee_z === pointdepart_z) 
+
+
+        );
+
+        if (!linedata_test && !((pointdepart_x === pointarrivee_x) && (pointdepart_y === pointarrivee_y) && (pointdepart_z === pointarrivee_z))) {
+        
+            linedata.push(point);
+
+        const material = new THREE.LineBasicMaterial({
+        color: Couleurlignes // Set your desired color
+        });
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(points_m);
+        
+        
+        line = new THREE.Line(geometry, material);
+
+
+        scene.add(line);
+
+        lines.push(line);
+    
+
+        if (index_test_v[0] === -1 || index_test_v[1] === -1) {
+            addSymbolT(pointdepart_x, pointdepart_y, function(textMesh) {
+            if (textMesh) {
+                // textMesh is the 3D text object you just created
+                point.textmesh=textMesh;
+            } 
+            });
+        }
+
+        if (objects_raycastes[0].name==='sphere' &&
+         objects_raycastes[1].name==='floor') {
+
+            node_lines[objects_raycastes[0].id].push(line);
+
+        } else if  (objects_raycastes[1].name==='sphere' &&
+         objects_raycastes[0].name==='floor') {
+
+            node_lines[objects_raycastes[1].id].push(line);
+
+
+        } else if (objects_raycastes[0].name==='sphere' &&
+         objects_raycastes[1].name==='sphere') {
+
+            node_lines[objects_raycastes[0].id].push(line);
+            node_lines[objects_raycastes[1].id].push(line);
+
+        }
+
+  
+        saveState();
+       
+
+        }
+
+       
+
+  
+
+
+    }
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+   
+    
+  }
+
+
+  counter_regle=false;
+  objects_raycastes=[];
+
+  function handleMouseClick(event) {
+
+        
+    //const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector3();
+    const mouse1 = new THREE.Vector3();
+    var rect = event.target.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left)/renderer.domElement.clientWidth) * 2 - 1;
+    mouse1.x=((event.clientX - rect.left));
+    mouse.y = -((event.clientY - rect.top)/renderer.domElement.clientHeight) * 2 + 1;
+    mouse1.y=-((event.clientY - rect.top));
+    mouse.z=0.5;
+    mouse1.z=0.;
+    let selectedObject_line;
+   
+    mouse.unproject(camera);
+
+    const raycaster = new THREE.Raycaster();
+    raycaster.set(camera.position, mouse.sub(camera.position).normalize());
+    //raycaster.setFromCamera(mouse, camera);
+
+    const objectsToCheck = spheres.concat(floor);
+
+    // Find intersection point with scene objects
+    const intersects = raycaster.intersectObjects(objectsToCheck);
+    
+    if (intersects.length > 0) {
+        // Calculate distance from camera position to intersection point
+        var intersectionPoint = intersects[0].point;
+        selectedObject_line=intersects[0].object;
+
+        const index = groups_data.findIndex(item => item.group === selectedObject_line);
+
+        if (index!==-1) {
+
+
+        const {group,newItem}=groups_data[index]; 
+
+        for (let i = 0; i < spheres.length; i++) {
+
+            spheres[i].material.color.set(Couleurlignes);
+        }
+
+
+        spheres[index].material.color.set(Couleur_object); // Set highlight color
+   
+        intersectionPoint.x=group_data_cube_float[index].x0_1;
+        intersectionPoint.z=group_data_cube_float[index].y0_1;
+        intersectionPoint.y=group_data_cube_float[index].z0_1;
+
+
+        } else {
+
+            for (let i = 0; i < spheres.length; i++) {
+
+                spheres[i].material.color.set(Couleurlignes);
+            }
+
+
+        }
+
+        index_test=index;
+
+
+    }
+
+
+      if (!startPoint) {
+
+                
+                objects_raycastes=[];
+                objects_raycastes=[];
+
+                // Reset startPoint and endPoint for the next measurement
+                startPoint = null;
+                endPoint = null;
+
+                points_m = [];
+
+                startPoint = intersectionPoint;
+
+                
+            //if (selectedObject.name=='floor') {
+
+            //    floor_1=1;
+                
+            //}
+
+            objects_raycastes.push(selectedObject_line);
+
+            index_test_v[0]=index_test;
+
+            points_m.push(startPoint);
+
+            
+
+
+            } else {
+                // If startPoint is set, set endPoint and measure distance
+                endPoint = intersectionPoint;
+
+                objects_raycastes.push(selectedObject_line);
+
+                
+
+                index_test_v[1]=index_test;
+
+                points_m.push(endPoint);
+
+                if (index_test_v[0]===-1 && index_test_v[1]===-1) {
+
+                    points_m = [];
+
+                } else if (index_test_v[0]===-1 && index_test_v[1]!==-1) {
+
+                    points_m[0].x=points_m[1].x;
+                    points_m[0].y=0;
+                    points_m[0].z=points_m[1].z;
+
+                } else if (index_test_v[1]===-1 && index_test_v[0]!==-1) {
+
+                    points_m[1].x=points_m[0].x;
+                    points_m[1].y=0;
+                    points_m[1].z=points_m[0].z;
+
+                }
+
+
+                createLine();
+
+                objects_raycastes=[];
+
+                // Reset startPoint and endPoint for the next measurement
+                startPoint = null;
+                endPoint = null;
+                
+                points_m = [];
+
+                
+            }
+
+
+
+    
+            
+
+}
+
+
+ 
+
+  function create_line() {
+
+    
+   
+    if (!counter_regle){
+
+       
+    document.getElementById('sceneContainer').addEventListener('click', handleMouseClick);
+
+    var button = document.getElementById('line');
+    button.title="Arrêter la création de lignes";
+    
+    counter_regle=true;
+
+
+    } else {
+
+
+    document.getElementById('sceneContainer').removeEventListener('click', handleMouseClick);
+
+    counter_regle=false;
+
+    points_m = [];
+    startPoint = null;
+    endPoint = null;
+
+    var button = document.getElementById('line');
+    button.title="Activer la création de lignes"
+
+
+    }
+
+  }
+
+
+
+
+
+
+        animate();
+
+
+
+        ///////////////////////////////////////////////////SELECTION BUTTOM//////////////////////////////////////////////////////////////////////
+
+        function selection () {
+            document.getElementById('sceneContainer').addEventListener('click', selection_object);
+
+        }
+
+        
+
+        selectedObject_2=null;
+
+        index_x=[];
+        //line_selected=0;
+        intersect_object_line=null;
+
+        function selection_object () {
+
+            
+
+
+            
+
+            
+            if (selectedObject_2 || intersect_object_line) {
+
+            
+                selectedObject_2=null;
+                intersect_object_line=null;
+
+                document.getElementById('sceneContainer').removeEventListener('click', selection_object);
+
+
+            return;
+
+            }
+
+
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        mouse.x = ((event.clientX - renderer.domElement.offsetLeft + 0*0.5) / window.innerWidth) * 2 - 1;
+        mouse.y = -((event.clientY - renderer.domElement.offsetTop + 0*0.5) / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        //const objects_raycaster=[spheres,lines,floor];
+
+
+        //groups_data.push({newItem:newItem_sphere,group:group_sphere});
+
+        const objectsToCheck = spheres.concat(floor,lines);
+
+
+        const intersects = raycaster.intersectObjects(objectsToCheck);
+
+            if (intersects.length>0) {
+
+                
+            const intersect_object=intersects[0].object;
+
+        if (intersect_object.name==='sphere') {
+
+            for (let i = 0; i < spheres.length; i++) {
+
+                spheres[i].material.color.set(Couleurlignes);
+            }
+
+            selectedObject_2=intersect_object;
+            //selectedObject_2.parent.children.forEach(function(child) {
+                selectedObject_2.material.color.set(Couleur_object); // Set highlight color
+
+            const index = groups_data.findIndex(item => item.group === selectedObject_2);
+               
+
+            const {group, newItem}=groups_data[index];
+
+            newItem.classList.add('selected');
+
+            //hideInputFields();
+
+            renderer.domElement.addEventListener('click', function() {
+            onMouseClick(index,newItem,group,Couleurlignes); // Pass the index as an argument to handleItemClick
+            });
+            
+            index_x[0]=index;
+
+            show_input_fields (newItem,group,index);
+
+            } else if (intersect_object instanceof THREE.Line) {
+
+                //selectedObject_2=intersect_object;
+
+                //line_selected=1;
+
+                for (let i = 0; i < lines.length; i++) {
+
+                    lines[i].material.color.set(Couleurlignes);
+                }
+
+
+                intersect_object.material.color.set(Couleur_object);
+                intersect_object_line=intersect_object
+                //onMouseClick(intersect_object);
+
+
+
+            } 
+
+    
+
+
+       
+
+        }
+
+        
+
+        
+
+    };
+
+    function findSphereIndex(x0, y0, z0) {
+        index = group_data_cube_float.findIndex(point => point.x0_1===x0 && point.y0_1 === y0 && point.z0_1 === z0)
+        return index
+    }
+
+
+    //function sd_lignes () {
+    //    document.getElementById('sceneContainer').addEventListener('click', sd_lignes_1);
+
+    //}
+
+
+//document.getElementById("myButton").addEventListener("click", duplicate_2);
+
+shape_duplicate=false;
+function duplicate() {
+
+    removeAllTextMeshes()
+
+    shape_duplicate=!shape_duplicate
+
+index=index_x[0];
+
+
+if (index !== undefined) { 
+
+const {group, newItem}=groups_data[index];
+
+
+structure_spherique_1(group_data_cube[index].prevRadius,group_data_cube[index].prevPosX, group_data_cube[index].prevPosY, group_data_cube[index].prevPosZ,Couleurlignes,offset_g=0.5,group_data_cube[index].prevVisible,index);
+
+
+}
+
+shape_duplicate=!shape_duplicate
+
+};
+
+
+
+/////////////////////////////////////PROGRAMME PRINCIPAL/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ki=0.08;
+
+var niveau_protection = document.getElementById('niveau-protection').value;
+
+document.getElementById('niveau-protection').addEventListener('change', function() {
+        niveau_protection = document.getElementById('niveau-protection').value;
+
+        if (this.value==="1") {
+
+            ki=0.08;
+
+        } else if (this.value==="2") {
+
+            ki=0.06;
+
+
+        } else {
+
+            ki=0.04;
+
+
+        }
+
+        saveState();
+
+
+    });
+
+    textMeshesT=[];
+
+    function addSymbolT(x, y, callback) {
+    const loader = new THREE.FontLoader();
+    loader.load(
+        'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+        function(font) {
+            const textGeometry = new THREE.TextGeometry('T', {
+                font: font,
+                size: 1,
+                height: 0.1
+            });
+            const textMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+            const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+            textMesh.position.set(x, 0, y);
+            textMesh.rotation.x = -Math.PI / 2;
+            scene.add(textMesh);
+            //textMeshesT.push(textMesh);
+            if (callback) {
+                callback(textMesh); // Call the callback function with textMesh
+            }
+        },
+        undefined, // Optional: onProgress function can be added here if needed
+        function(error) {
+            console.error('An error occurred while loading the font:', error);
+            if (callback) {
+                callback(null); // Optionally call the callback with null on error
+            }
+        }
+    );
+}
+
+        textMeshes=[];
+
+        function addResult(x, y, z,label) {
+            const loader = new THREE.FontLoader();
+            loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+                const textGeometry = new THREE.TextGeometry(label, {
+                    font: font,
+                    size: 1,
+                    height: 0.1
+                });
+                const textMaterial = new THREE.MeshBasicMaterial({ color: couleur_resultats });
+                const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+                textMesh.position.set(x+0.3, z, y+0.1);
+                textMesh.rotation.x = -Math.PI/4;
+                textMesh.rotation.z = -Math.PI/4;
+                scene.add(textMesh);
+                textMeshes.push(textMesh);
+            });
+        }
+
+        function removeAllTextMeshes() {
+
+            if (textMeshes) {
+
+            // Parcourir tous les TextMesh dans le tableau
+            for (let i = 0; i < textMeshes.length; i++) {
+                // Retirer le TextMesh de la scène
+                scene.remove(textMeshes[i]);
+
+                // Optionnel : Libérer la mémoire en supprimant la géométrie et le matériau
+                textMeshes[i].geometry.dispose();
+                textMeshes[i].material.dispose();
+            }
+
+            // Vider le tableau des TextMesh après suppression
+            textMeshes.length = 0;
+            sd_array=[];
+            C=[];
+            CG=[];
+
+            document.getElementById('sceneContainer').removeEventListener('click', sd_lignes_x);
+
+            document.getElementById('sd_lignes').style.backgroundImage = "url('photos/run_disable.jpg')"; 
+            document.getElementById('sd_lignes').title="";
+            document.getElementById('sd_lignes').disabled = true;
+            document.getElementById('sd_lignes').classList.add('disabled');
+
+            counter_sd_lignes=false;
+
+            }
+        }     
+
+        function textMeshTRemove (line) {
+
+
+            scene.remove(line);
+
+            // Retirer la ligne de la liste globale des lignes
+            const index = lines.indexOf(line);
+
+            if (index > -1) {
+
+                if (linedata[index].textmesh) {
+
+                    scene.remove(linedata[index].textmesh);
+
+                }
+                        
+                lines.splice(index, 1);
+                linedata.splice(index,1);
+                        
+            }
+
+                    // Retirer la ligne des autres points connectés
+            Object.keys(node_lines).forEach(pointId => {
+                const indexInConnections = node_lines[pointId].indexOf(line);
+                if (indexInConnections > -1) {
+                    node_lines[pointId].splice(indexInConnections, 1);
+                }
+            });
+     
+        
+
+        
+        }
+
+
+     
+
+        function removePoint(point) {
+
+
+            // Vérifier s'il y a des lignes associées au point
+            if (node_lines[point.id]) {
+                 //textMeshTRemove (point.position.x,point.position.y);
+
+                const connectedLines = node_lines[point.id];
+
+                for (let i = connectedLines.length - 1; i >= 0; i--) {
+                const line = connectedLines[i];
+                scene.remove(line);
+                //line.geometry.dispose();
+                //line.material.dispose();
+
+                // Optionally, remove the line from the array if needed
+                connectedLines.splice(i, 1);
+
+                //line.geometry.dispose();
+                //line.material.dispose();
+                
+                // Retirer la ligne de la liste globale des lignes
+                const index = lines.indexOf(line);
+
+                if (index > -1) {
+
+                    if (linedata[index].textmesh) {
+
+                        scene.remove(linedata[index].textmesh);
+                    }
+                    
+                    lines.splice(index, 1);
+                    linedata.splice(index,1);
+                    
+                }
+
+                // Retirer la ligne des autres points connectés
+                Object.keys(node_lines).forEach(pointId => {
+                    const indexInConnections = node_lines[pointId].indexOf(line);
+                    if (indexInConnections > -1) {
+                        node_lines[pointId].splice(indexInConnections, 1);
+                    }
+                });
+
+
+                }
+
+                //node_lines.splice(point.id,1);
+                //node_lines[point.id] = null;
+                delete node_lines[point.id];
+                
+            }
+
+            // Supprimer le point lui-même
+            scene.remove(point);
+            const index_p = spheres.indexOf(point);
+
+            if (sprites[index_p]) {
+
+                scene.remove(sprites[index_p])
+
+
+            }
+            
+
+        }
+
+
+        function removelines(point) {
+
+
+            
+            // Vérifier s'il y a des lignes associées au point
+            if (node_lines[point.id]) {
+
+                //textMeshTRemove (point.position.x,point.position.y);
+
+                const connectedLines = node_lines[point.id];
+
+                for (let i = connectedLines.length - 1; i >= 0; i--) {
+                const line = connectedLines[i];
+                scene.remove(line);
+                //line.geometry.dispose();
+                //line.material.dispose();
+ 
+                // Optionally, remove the line from the array if needed
+                connectedLines.splice(i, 1);
+            
+
+                    scene.remove(line);
+                    //line.geometry.dispose();
+                    //line.material.dispose();
+                    
+                    // Retirer la ligne de la liste globale des lignes
+                    const index = lines.indexOf(line);
+
+                    if (index > -1) {
+
+                        if (linedata[index].textmesh) {
+
+                            scene.remove(linedata[index].textmesh);
+                        }
+                        
+                        lines.splice(index, 1);
+                        linedata.splice(index,1);
+                        
+                    }
+
+                    // Retirer la ligne des autres points connectés
+                    Object.keys(node_lines).forEach(pointId => {
+                        const indexInConnections = node_lines[pointId].indexOf(line);
+                        if (indexInConnections > -1) {
+                            node_lines[pointId].splice(indexInConnections, 1);
+                            
+                        }
+                    });
+
+
+                }
+
+
+            }
+
+
+        }
+
+C=[];
+CG=[];
+
+const maxUndoRedoStackSize = 20;
+let undoStack = [];
+let redoStack = [];
+let saveState_test = false;
+document.getElementById('previous').classList.add('disabled');
+document.getElementById('next').classList.add('disabled');
+document.getElementById('previous').disabled = true;
+document.getElementById('next').disabled = true;
+
+previousState = {
+    group_data_cube : JSON.parse(JSON.stringify(group_data_cube || [])),
+    group_data_cube_float : JSON.parse(JSON.stringify(group_data_cube_float || [])),
+    groups_data : JSON.parse(JSON.stringify(groups_data || [])),
+    sprites : JSON.parse(JSON.stringify(sprites || [])),
+    spheres : JSON.parse(JSON.stringify(spheres || [])),
+    node_lines : JSON.parse(JSON.stringify(node_lines || [])),
+    lines : JSON.parse(JSON.stringify(lines || [])),
+    linedata : JSON.parse(JSON.stringify(linedata || [])),
+    textMeshes : JSON.parse(JSON.stringify(textMeshes || [])),
+    nomprojet: nomprojet || null,
+    nomredacteur: nomredacteur || null,
+    nomsociete: nomsociete || null,
+    niveau_protection: niveau_protection || null,
+    ki: ki || null, // No need for JSON.parse(JSON.stringify()) for primitives
+    Couleur_scene: Couleur_scene || null,
+    Couleur_object: Couleur_object || null,
+    couleur_resultats: couleur_resultats || null,
+    Couleurlignes: Couleurlignes || null
+
+}
+
+
+//undoStack.push(JSON.stringify(previousState));  
+
+//function findDifferences(previousState, currentState) {
+   // const modified = {};
+    
+    // Parcourir toutes les clés de l'état courant
+  //  for (const key in currentState) {
+  //      if (!_.isEqual(previousState[key], currentState[key])) {
+  //          modified[key] = {
+  //              previous: previousState[key],
+   //             current: currentState[key],
+   //         };
+  //      }
+ //   }
+ //   return modified;
+//}
+
+function saveState () {
+
+    
+
+    document.getElementById('previous').classList.remove('disabled','enabled');
+    document.getElementById('previous').disabled = false;
+    document.getElementById('next').classList.remove('disabled','enabled');
+    document.getElementById('next').classList.add('disabled');
+    document.getElementById('next').disabled = true;
+
+
+    const currentState = {
+    group_data_cube : JSON.parse(JSON.stringify(group_data_cube || [])),
+    group_data_cube_float : JSON.parse(JSON.stringify(group_data_cube_float || [])),
+    groups_data : JSON.parse(JSON.stringify(groups_data || [])),
+    sprites : JSON.parse(JSON.stringify(sprites || [])),
+    spheres : JSON.parse(JSON.stringify(spheres || [])),
+    node_lines : JSON.parse(JSON.stringify(node_lines || [])),
+    lines : JSON.parse(JSON.stringify(lines || [])),
+    linedata : JSON.parse(JSON.stringify(linedata || [])),
+    textMeshes : JSON.parse(JSON.stringify(textMeshes || [])),
+    nomprojet: nomprojet || null,
+    nomredacteur: nomredacteur || null,
+    nomsociete: nomsociete || null,
+    niveau_protection: niveau_protection || null,
+    ki: ki || null, // No need for JSON.parse(JSON.stringify()) for primitives
+    Couleur_scene: Couleur_scene || null,
+    Couleur_object: Couleur_object || null,
+    couleur_resultats: couleur_resultats || null,
+    Couleurlignes: Couleurlignes || null
+
+    }
+
+    // Vérifier si l'état actuel est différent de l'état précédent
+    if ((!_.isEqual(previousState, currentState) && saveState_test === false)) {
+
+        if (undoStack.length >= maxUndoRedoStackSize) {
+            undoStack.shift(); // Supprimez l'état le plus ancien
+        }
+
+        // Ajouter l'état précédent à la pile des undo
+
+        undoStack.push(JSON.stringify(previousState));  
+
+        redoStack = [];
+
+        redoStack.push(JSON.stringify(currentState));  
+
+        removeAllTextMeshes();
+
+        //const differences = findDifferences(previousState, currentState);
+        //console.log(differences);
+
+        // Mettre à jour l'état précédent avec l'état actuel
+        previousState = currentState;
+
+
+
+
+
+        
+
+    }
+
+
+}
+
+
+function next() {
+
+    saveState_test = !saveState_test;
+
+    if (redoStack.length > 2) {
+
+        const nextState = redoStack.pop();
+        undoStack.push(nextState);
+
+        // Parse and restore the next state
+        const restoredState = JSON.parse(redoStack[redoStack.length-1]);
+
+        restoreState(restoredState);
+
+        document.getElementById('previous').classList.remove('disabled','enabled');
+        //document.getElementById('next').classList.add('disabled');
+        document.getElementById('previous').disabled = false;
+
+        //console.log(undoStack.length,redoStack.length);
+
+
+
+
+    } else if (redoStack.length === 2) {
+
+        const nextState = redoStack.pop();
+        undoStack.push(nextState);
+
+        // Parse and restore the next state
+        const restoredState = JSON.parse(redoStack[redoStack.length-1]);
+
+        restoreState(restoredState);
+
+        document.getElementById('next').classList.remove('disabled','enabled');
+        document.getElementById('next').classList.add('disabled');
+        document.getElementById('next').disabled = true;
+        //undoStack.pop();
+
+        document.getElementById('previous').classList.remove('disabled','enabled');
+        //document.getElementById('next').classList.add('disabled');
+        document.getElementById('previous').disabled = false;
+
+        //console.log(undoStack.length,redoStack.length);
+
+    }
+
+    saveState_test = !saveState_test;
+}
+
+function previous() {
+
+    saveState_test = !saveState_test;
+
+
+    if (undoStack.length > 1) {
+
+
+        const lastState = undoStack.pop();
+        redoStack.push(lastState);
+
+        // Parse and restore the previous state
+        const restoredState = JSON.parse(lastState);
+        
+        restoreState(restoredState);
+
+        document.getElementById('next').classList.remove('disabled','enabled');
+        document.getElementById('next').disabled = false;
+
+        //console.log(undoStack.length,redoStack.length);
+
+ 
+
+    } else if (undoStack.length === 1) {
+
+        const lastState = undoStack.pop();
+        redoStack.push(lastState);
+
+        // Parse and restore the previous state
+        const restoredState = JSON.parse(lastState);
+        
+        restoreState(restoredState);
+
+
+        document.getElementById('previous').classList.remove('disabled','enabled');
+        document.getElementById('previous').classList.add('disabled');
+        document.getElementById('previous').disabled = true;
+
+        document.getElementById('next').classList.remove('disabled','enabled');
+        document.getElementById('next').disabled = false;
+
+        //console.log(undoStack.length,redoStack.length);
+
+
+    }
+
+
+
+
+    saveState_test = !saveState_test;
+}
+
+function restoreState(state) {
+
+    clearScene();
+
+    //nouvel ajout
+    selectedItem_2=null;
+    //
+
+    // Restore scene and data
+    group_data_cube = state.group_data_cube || [];
+    group_data_cube_float = state.group_data_cube_float || [];
+    groups_data = state.groups_data || [];
+    sprites = state.sprites || [];
+    spheres = state.spheres || [];
+    node_lines = state.node_lines || [];
+    lines = state.lines || [];
+    linedata=state.linedata || [];
+    textMeshes = state.textMeshes || [];
+    nomprojet=state.nomprojet || null;
+    nomredacteur=state.nomredacteur || null;
+    nomsociete=state.nomsociete || null;
+    niveau_protection=state.niveau_protection || null;
+    ki=state.ki || null;
+    //camera_position=state.camera_position;
+    Couleur_scene=state.Couleur_scene || null;
+    Couleur_object=state.Couleur_object || null;
+    couleur_resultats=state.couleur_resultats || null;
+    Couleurlignes=state.Couleurlignes || null;
+
+    previousState = {
+        group_data_cube : JSON.parse(JSON.stringify(group_data_cube || [])),
+        group_data_cube_float : JSON.parse(JSON.stringify(group_data_cube_float || [])),
+        groups_data : JSON.parse(JSON.stringify(groups_data || [])),
+        sprites : JSON.parse(JSON.stringify(sprites || [])),
+        spheres : JSON.parse(JSON.stringify(spheres || [])),
+        node_lines : JSON.parse(JSON.stringify(node_lines || [])),
+        lines : JSON.parse(JSON.stringify(lines || [])),
+        linedata : JSON.parse(JSON.stringify(linedata || [])),
+        textMeshes : JSON.parse(JSON.stringify(textMeshes || [])),
+        nomprojet: nomprojet || null,
+        nomredacteur: nomredacteur || null,
+        nomsociete: nomsociete || null,
+        niveau_protection: niveau_protection || null,
+        ki: ki || null, // No need for JSON.parse(JSON.stringify()) for primitives
+        Couleur_scene: Couleur_scene || null,
+        Couleur_object: Couleur_object || null,
+        couleur_resultats: couleur_resultats || null,
+        Couleurlignes: Couleurlignes || null
+    };
+
+    document.getElementById('nom_projet').value=nomprojet;
+    document.getElementById('nom_redacteur').value=nomredacteur;
+    document.getElementById('nom_societe').value=nomsociete;
+    document.getElementById('nom_societe').value=nomsociete;
+    document.getElementById('niveau-protection').value=niveau_protection;
+    document.getElementById('Couleur_scene').value=Couleur_scene;
+    renderer.setClearColor(Couleur_scene, 1); // Updates the background color of the scene
+    document.getElementById('Couleur_object').value=Couleur_object;
+    document.getElementById('Couleur_lignes').value=Couleurlignes;
+    document.getElementById('Couleur_resultats').value=couleur_resultats;
+    //document.getElementById('camera-position').value=camera_position.toFixed(0),
+    //camera.position.set(camera_position, camera_position, camera_position);
+    //camera.lookAt(0, 0, 0);
+    //controls.update();
+
+
+
+
+        
+    // Clear and recreate scene elements
+    //clearScene(); // Custom function to remove all elements from the scene
+    displayShapes(); // Custom function to add all elements back based on the restored state
+}
+
+
+V = new Array(group_data_cube_float.length).fill(0);
+
+
+async function programme_principal() {
+
+
+
+    if (spheres.length===0) {
+
+        var message_box = "Absence de noeuds dans le modèle élaboré !";
+        Swal.fire({
+            html: message_box,
+            icon: "warning",
+            customClass: {
+            icon: 'custom-icon'
+            }
+        });
+
+        // alert('Absence de structures !');
+
+        return
+
+
+    }
+
+  
+    if (lines.length===0) {
+
+        var message_box = "Absence de lignes dans le modèle élaboré !";
+        Swal.fire({
+            html: message_box,
+            icon: "warning",
+            customClass: {
+            icon: 'custom-icon'
+            }
+        });
+
+        // alert('Absence de structures !');
+
+        return
+
+
+    }
+
+
+    let test_terre = false;
+
+    for (let i = 0; i < linedata.length; i++) {
+        if (linedata[i].textmesh) {
+            test_terre = true; // Signalement d'une erreur
+            break; // Pas besoin de continuer
+        }
+    }
+
+    if (test_terre ===false) {
+
+        var message_box = "Absence de conducteurs de descente dans le modèle élaboré !";
+        Swal.fire({
+            html: message_box,
+            icon: "warning",
+            customClass: {
+            icon: 'custom-icon'
+            }
+        });
+
+
+        return
+
+
+    }
+
+
+    let sprite_actif = false;
+
+    for (let i = 0; i < sprites.length; i++) {
+        if (sprites[i].visible=== true) {
+            sprite_actif = true; // Signalement d'une erreur
+            break; // Pas besoin de continuer
+        }
+    }
+
+    if (sprite_actif ===false) {
+
+        var message_box = "Absence de noeuds énergisés dans le modèle élaboré !";
+        Swal.fire({
+            html: message_box,
+            icon: "warning",
+            customClass: {
+            icon: 'custom-icon'
+            }
+        });
+
+        return
+
+
+    }
+
+
+
+
+
+
+
+
+    removeAllTextMeshes();
+
+    document.getElementById('sceneContainer').removeEventListener('click', handleMouseClick);
+
+    counter_regle=false;
+
+    points_m = [];
+    startPoint = null;
+    endPoint = null;
+
+    var button = document.getElementById('line');
+    button.title="Activer la création de lignes"
+
+  
+
+    A=[];
+    AA=[];
+
+    for (var i = 0; i < group_data_cube_float.length; i++) {
+    A[i] = new Array(group_data_cube_float.length).fill(0);
+    AA[i]=new Array(group_data_cube_float.length).fill(0);
+    }
+
+
+    V = new Array(group_data_cube_float.length).fill(0);
+    VV = new Array(group_data_cube_float.length).fill(0);
+    T = new Array(group_data_cube_float.length).fill(0);
+    C = new Array(group_data_cube_float.length).fill(0);
+    C1 = new Array(group_data_cube_float.length).fill(0);
+    C2 = new Array(group_data_cube_float.length).fill(0);
+    C3 = new Array(group_data_cube_float.length).fill(0);
+
+    CG=[];
+
+    const response = await fetch('/calcul_matriciel_separation_distance', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({group_data_cube,group_data_cube_float,linedata,ki})
+    });
+ 
+    // Attend la réponse du serveur
+    const result = await response.json();
+
+    V = result.V;
+    A = result.A;
+    T = result.T;
+
+
+
+
+    for (var k = 0; k < group_data_cube_float.length; k++) {
+        
+        if (V[k]===ki) {
+
+            
+
+            for (var i = 0; i < group_data_cube_float.length; i++) {
+
+                s1=0;
+
+                for (var j = 0; j < group_data_cube_float.length; j++) {
+
+                    if (A[i][j]===0) {
+                        s1=s1;
+                        s2=0;
+
+                    } else {
+
+                        s1=s1+1/(A[i][j]);
+                        s2=-1/(A[i][j]);
+
+
+                    }
+
+                    if (T[i]===0) {
+
+                        s3=0;
+
+                    } else {
+
+                        s3=1/T[i];
+                    }
+
+                    AA[i][j]=s2;
+
+
+
+                }
+
+                AA[i][i]=s1+s3;
+
+                VV[i]=0;
+
+
+
+            }
+
+            VV[k]=V[k];
+
+            try {
+
+                B=math.inv(AA);
+            } catch (error) {
+
+                var message_box = "Le programme a été interrompu en raison d'une erreur dans la construction des noeuds du modèle élaboré !";
+                Swal.fire({
+                html: message_box,
+                icon: "warning",
+                customClass: {
+                icon: 'custom-icon'
+                }
+                });
+
+                return
+            }
+
+            B=math.inv(AA);
+
+            C = math.multiply(B, VV);
+            C2 = JSON.parse(JSON.stringify(C));
+
+            CG.push(C2);
+
+
+
+
+
+
+            for (var o = 0; o < group_data_cube_float.length; o++) {
+
+                if (C[o]<C1[o]) {
+
+                    C[o]=C1[o];
+
+                }
+
+
+
+
+            }
+
+
+        
+        } else {
+
+
+
+
+
+            CG.push(C2);
+
+
+        }
+
+        
+
+        //C1 = C.map(row => row.slice());
+        C1 = JSON.parse(JSON.stringify(C));
+
+
+
+
+
+    }
+
+    for (let p = 0; p <group_data_cube_float.length; p++) {
+
+        addResult(group_data_cube_float[p].x0_1,group_data_cube_float[p].y0_1,group_data_cube_float[p].z0_1,C[p].toFixed(2))
+
+    }
+
+    if (C.length!==0) {
+
+        document.getElementById('sd_lignes').style.backgroundImage = "url('photos/run-2.jpg')"; 
+        document.getElementById('sd_lignes').title="Lancer le calcul de la distance de séparation à un point quelconque";
+        document.getElementById('sd_lignes').disabled = false;
+        document.getElementById('sd_lignes').classList.remove('disabled');
+        document.getElementById('sd_lignes').classList.add('enabled');
+
+
+    } else {
+
+        document.getElementById('sd_lignes').style.backgroundImage = "url('photos/run_disable.jpg')"; 
+        document.getElementById('sd_lignes').title="";
+        document.getElementById('sd_lignes').disabled = true;
+        document.getElementById('sd_lignes').classList.add('disabled');
+
+    }
+
+    
+
+
+
+}
+
+let counter_sd_lignes=false;
+
+if (C.length===0) {
+
+    document.getElementById('sd_lignes').disabled = true;
+    document.getElementById('sd_lignes').classList.add('disabled');
+
+}
+
+function sd_lignes () {
+
+
+
+if (!counter_sd_lignes) {
+
+document.getElementById('sceneContainer').addEventListener('click', sd_lignes_x);
+
+document.getElementById('sd_lignes').style.backgroundImage = "url('photos/run-3.jpg')"; 
+document.getElementById('sd_lignes').title="arrêter le calcul";
+
+document.getElementById('sd_lignes').disabled = false;
+document.getElementById('sd_lignes').classList.remove('disabled');
+document.getElementById('sd_lignes').classList.add('enabled');
+
+counter_sd_lignes=!counter_sd_lignes;
+
+
+} else {
+
+document.getElementById('sd_lignes').style.backgroundImage = "url('photos/run-2.jpg')"; 
+document.getElementById('sd_lignes').title="Lancer le calcul de la distance de séparation à un point quelconque";
+document.getElementById('sd_lignes').disabled = false;
+document.getElementById('sd_lignes').classList.remove('disabled');
+document.getElementById('sd_lignes').classList.add('enabled');
+
+document.getElementById('sceneContainer').removeEventListener('click', sd_lignes_x);
+
+counter_sd_lignes=!counter_sd_lignes;
+
+}
+
+}
+
+sd_array=[];
+
+function sd_lignes_x () {
+
+    var sd1=0;
+    var sd=0.;
+
+    var x,y,z;
+    
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    mouse.x = ((event.clientX - renderer.domElement.offsetLeft + 0*0.5) / window.innerWidth) * 2 - 1;
+    mouse.y = -((event.clientY - renderer.domElement.offsetTop + 0*0.5) / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    
+
+    const intersects = raycaster.intersectObjects(lines);
+
+    if (intersects.length>0) {
+
+           
+        const line=intersects[0].object;
+
+        const index = lines.indexOf(line);
+
+
+        if (index > -1) {
+
+            const x1=linedata[index].point_depart.pointdepart_x;
+            const y1=linedata[index].point_depart.pointdepart_y;
+            const z1=linedata[index].point_depart.pointdepart_z;
+
+            const x2=linedata[index].point_arrivee.pointarrivee_x;
+            const y2=linedata[index].point_arrivee.pointarrivee_y;
+            const z2=linedata[index].point_arrivee.pointarrivee_z;
+
+            const distance=linedata[index].distance;
+
+            x=intersects[0].point.x;
+            y=intersects[0].point.z;
+            z=intersects[0].point.y;
+
+            const distance_x=math.sqrt(math.pow(x1-x,2)+math.pow(y1-y,2)+math.pow(z1-z,2));
+            
+
+            const index_sp_1 = findSphereIndex(x1, y1, z1); 
+            const index_sp_2 = findSphereIndex(x2, y2, z2); 
+
+            let cc1, cc2;
+
+            for (let k = 0; k <= group_data_cube.length - 1; k++) {
+
+                if (V[k]!==0) {
+                   
+                    if (!(index_sp_1>-1)) {
+
+                        cc1=0.;
+
+                    } else {
+
+                        cc1=CG[k][index_sp_1];
+
+
+                    }
+
+                    
+
+
+                    if (!(index_sp_2>-1)) {
+
+                        cc2=0.;
+
+                    } else {
+
+                        cc2=CG[k][index_sp_2];
+
+                    }
+
+                    sd=((cc2-cc1)/(distance))*(distance_x)+cc1;
+
+                    if (sd<sd1) {
+
+                        sd=sd1;
+                    }
+
+                    sd1=sd;
+
+                    
+                } 
+               
+
+
+            }
+
+            addResult(x,y,z,sd.toFixed(2));
+            sd_array.push([x0=x,y0=y,z0=z,sd0=sd]);
+
+ 
+                    
+        }
+   
+
+    }
+
+
+
+
+
+   
+
+};
+
+
+
+////////////////////////////////////////PROGRAMME PRINCIPAL//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//const aa=groups_data;
+
+function new_file() {
+
+    window.open('SEPARATION DISTANCE 17 08 24 VERSION FINALE SERVEUR.html', '_blank');
+}
+
+
+
+let fileHandle;
+
+
+
+// Save function
+async function save() {
+    const data = {
+        nomprojet,
+        nomredacteur,
+        nomsociete,
+        niveau_protection,
+        ki,
+        group_data_cube,
+        group_data_cube_float,
+        groups_data,
+        sprites,
+        spheres,
+        node_lines,
+        linedata,
+        textMeshes,
+        mission_sd:'sd',
+        camera_position,
+        Couleur_scene,
+        Couleur_object,
+        couleur_resultats,
+        Couleurlignes
+    };
+
+    const jsonData = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+
+    try {
+        if (!fileHandle) {
+            // If no file handle, ask the user to pick a file and save for the first time
+            fileHandle = await showSaveFilePicker({
+                suggestedName:  fileName || 'sd_Calcul_distance_separation.json',// Use stored fileName or default
+                types: [{
+                    description: 'JSON Files',
+                    accept: { 'application/json': ['.json'] },
+                }],
+            });
+
+            fileName = fileHandle.name; // Store the new file name if a new file is picked
+        }
+
+        // Create a writable stream and write the blob to the file
+        const writableStream = await fileHandle.createWritable();
+        await writableStream.write(blob);
+        await writableStream.close();
+        //alert('Fichier enregistré avec succès.');
+    } catch (err) {
+        if (err.name === 'AbortError') {
+            //console.warn('Ouverture du fichier a été abandonnée.');
+        } else {
+            //console.error('Erreur de lecture du fichier:', err);
+        }
+    }
+}
+
+// Save As function
+async function save_as() {
+
+    
+    const data = {
+        nomprojet,
+        nomredacteur,
+        nomsociete,
+        niveau_protection,
+        ki,
+        group_data_cube,
+        group_data_cube_float,
+        groups_data,
+        sprites,
+        spheres,
+        node_lines,
+        linedata,
+        textMeshes,
+        mission_sd:'sd',
+        camera_position,
+        Couleur_scene,
+        Couleur_object,
+        couleur_resultats,
+        Couleurlignes
+    };
+
+    const jsonData = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+
+    if (window.showSaveFilePicker) {
+        // Use File System Access API if available
+        try {
+
+            const suggestedName = fileName || 'sd_calcul_distance_separation.json'; // Use stored fileName or default
+            // Open a file picker to select the file to save
+            fileHandle = await showSaveFilePicker({
+                suggestedName: suggestedName,
+                types: [{
+                    description: 'JSON Files',
+                    accept: { 'application/json': ['.json'] },
+                }],
+            });
+
+            fileName = fileHandle.name; // Store the file name
+
+            // Create a writable stream and write the blob to the file
+            const writableStream = await fileHandle.createWritable();
+            await writableStream.write(blob);
+            await writableStream.close();
+            
+            //alert('Fichier enregistré avec succès.');
+        } catch (err) {
+            if (err.name === 'AbortError') {
+                //console.warn('Ouverture du fichier a été abandonnée.');
+            } else {
+                //console.error('Erreur de lecture du fichier:', err);
+            }
+        }
+    } else {
+        // Fallback for browsers without File System Access API
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sd_calcul_distance_separation.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+}
+
+let fileName;
+
+document.getElementById('openShapesButton').addEventListener('click', async(event) => {
+
+
+    try {
+        // Open file picker and get the file handle
+        [fileHandle] = await window.showOpenFilePicker({
+            types: [{
+                description: 'JSON Files',
+                accept: { 'application/json': ['.json'] },
+            }],
+        });
+
+
+    fileName = fileHandle.name; // Store the file name
+
+    const file = await fileHandle.getFile(); // Get the file object from the file handle
+
+
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+
+    try {
+    const data = JSON.parse(e.target.result);
+
+    const prefixeAttendu = 'sd_';
+
+    
+    if (!data.mission_sd || (!file.name.startsWith(prefixeAttendu))) {
+
+        
+
+        alert('Fichier invalide');
+
+        return
+
+
+    }
+
+    clearScene();
+
+    removeAllTextMeshes();
+
+    undoStack = [];
+    redoStack = [];
+    saveState_test = false;
+
+    // Replace the existing arrays with the loaded data
+    group_data_cube = data.group_data_cube || [];
+    group_data_cube_float = data.group_data_cube_float || [];
+    groups_data = data.groups_data || [];
+    sprites = data.sprites || [];
+    spheres = data.spheres || [];
+    node_lines = data.node_lines || [];
+    lines = data.lines || [];
+    linedata=data.linedata || [];
+    textMeshes = data.textMeshes || [];
+    nomprojet=data.nomprojet;
+    nomredacteur=data.nomredacteur;
+    nomsociete=data.nomsociete;
+    niveau_protection=data.niveau_protection;
+    ki=data.ki;
+    camera_position=data.camera_position;
+    Couleur_scene=data.Couleur_scene;
+    Couleur_object=data.Couleur_object;
+    couleur_resultats=data.couleur_resultats;
+    Couleurlignes=data.Couleurlignes;
+
+    document.getElementById('nom_projet').value=nomprojet;
+    document.getElementById('nom_redacteur').value=nomredacteur;
+    document.getElementById('nom_societe').value=nomsociete;
+    document.getElementById('nom_societe').value=nomsociete;
+    document.getElementById('niveau-protection').value=niveau_protection;
+    document.getElementById('Couleur_scene').value=Couleur_scene;
+    renderer.setClearColor(Couleur_scene, 1); // Updates the background color of the scene
+    document.getElementById('Couleur_object').value=Couleur_object;
+    document.getElementById('Couleur_lignes').value=Couleurlignes;
+    document.getElementById('Couleur_resultats').value=couleur_resultats;
+    document.getElementById('camera-position').value=camera_position.toFixed(0),
+    camera.position.set(camera_position, camera_position, camera_position);
+    camera.lookAt(0, 0, 0);
+    controls.update();
+
+    document.getElementById('previous').classList.remove('enabled','disabled');
+    document.getElementById('next').classList.remove('enabled','disabled');
+    document.getElementById('previous').classList.add('disabled');
+    document.getElementById('next').classList.add('disabled');
+    document.getElementById('previous').disabled = true;
+    document.getElementById('next').disabled = true;
+    saveState_test = false;
+
+    previousState = {
+        group_data_cube : JSON.parse(JSON.stringify(group_data_cube || [])),
+        group_data_cube_float : JSON.parse(JSON.stringify(group_data_cube_float || [])),
+        groups_data : JSON.parse(JSON.stringify(groups_data || [])),
+        sprites : JSON.parse(JSON.stringify(sprites || [])),
+        spheres : JSON.parse(JSON.stringify(spheres || [])),
+        node_lines : JSON.parse(JSON.stringify(node_lines || [])),
+        lines : JSON.parse(JSON.stringify(lines || [])),
+        linedata : JSON.parse(JSON.stringify(linedata || [])),
+        textMeshes : JSON.parse(JSON.stringify(textMeshes || [])),
+        nomprojet: nomprojet || null,
+        nomredacteur: nomredacteur || null,
+        nomsociete: nomsociete || null,
+        niveau_protection: niveau_protection || null,
+        ki: ki || null, // No need for JSON.parse(JSON.stringify()) for primitives
+        Couleur_scene: Couleur_scene || null,
+        Couleur_object: Couleur_object || null,
+        couleur_resultats: couleur_resultats || null,
+        Couleurlignes: Couleurlignes || null
+    };
+
+    // Update the display with the new data
+    displayShapes();
+
+    
+ 
+    } catch (error) {
+        
+       alert('Fichier invalide');
+       return;
+
+    }
+
+    };
+
+    reader.onerror = function() {
+        //alert('Erreur de lecture du fichier');
+    };
+
+
+    reader.readAsText(file);
+
+    } catch (error) {
+
+        
+        //console.error('Erreur lors de l\'ouverture du fichier:', error);
+        //alert('Erreur lors de l\'ouverture du fichier.');
+    }
+
+
+    //input.click();
+});
+
+
+
+var shape_creation = false;
+
+function displayShapes() {
+
+    document.getElementById('label-list').innerHTML = '';
+    document.getElementById('item-list').innerHTML = '';
+    groups_data = [];
+    lines = [];
+    sprites = [];
+    spheres = [];
+    //node_lines = [];
+    //linedata=[];
+    textMeshes = [];
+
+        
+    shape_creation = !shape_creation;
+
+
+    for (let o = 0; o <= group_data_cube.length - 1; o++) {
+        const index = o;
+
+         
+       structure_spherique_1(group_data_cube[index].prevRadius, group_data_cube[index].prevPosX, group_data_cube[index].prevPosY, group_data_cube[index].prevPosZ, Couleurlignes, 0, group_data_cube[index].prevVisible, index);
+
+
+       
+    }
+
+    for (let o = 0; o < linedata.length; o++) {
+
+        const point_d_x=linedata[o].point_depart.pointdepart_x;
+        const point_d_y=linedata[o].point_depart.pointdepart_y;
+        const point_d_z=linedata[o].point_depart.pointdepart_z;
+
+        const point_a_x=linedata[o].point_arrivee.pointarrivee_x;
+        const point_a_y=linedata[o].point_arrivee.pointarrivee_y;
+        const point_a_z=linedata[o].point_arrivee.pointarrivee_z;
+
+        const point_d = new THREE.Vector3(point_d_x, point_d_z, point_d_y);
+        const point_a = new THREE.Vector3(point_a_x, point_a_z, point_a_y);
+
+
+        const points_m=[point_d,point_a]
+
+        const material = new THREE.LineBasicMaterial({
+        color: Couleurlignes // Set your desired color
+        });
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(points_m);
+        
+        
+        line = new THREE.Line(geometry, material);
+
+
+        scene.add(line);
+
+        lines.push(line);
+
+        index_test_v0=linedata[o].point_depart.index_test_v0;
+        index_test_v1=linedata[o].point_arrivee.index_test_v1;
+
+        const index_sp1= findSphereIndex(point_d_x, point_d_y, point_d_z);
+        const index_sp2= findSphereIndex(point_a_x, point_a_y, point_a_z);
+             
+
+        if (index_test_v0 === -1 || index_test_v1 === -1) {
+            addSymbolT(point_d_x, point_d_y, function(textMesh) {
+
+            if (textMesh) {
+                // textMesh is the 3D text object you just created
+                linedata[o].textmesh=textMesh;
+            } 
+                
+
+            });
+        }
+
+
+        if (index_test_v0 !== -1 && index_test_v1 == -1) {
+
+
+
+            if (!node_lines[spheres[index_sp1].id]) {
+                node_lines[spheres[index_sp1].id] = [];
+            }
+
+            node_lines[spheres[index_sp1].id].push(line);
+
+
+
+        } else if  (index_test_v0 == -1 && index_test_v1 !== -1) {
+
+            if (!node_lines[spheres[index_sp2].id]) {
+                node_lines[spheres[index_sp2].id] = [];
+            }
+
+            node_lines[spheres[index_sp2].id].push(line);
+
+
+        } else if (index_test_v0 !== -1 && index_test_v1 !== -1) {
+
+            if (!node_lines[spheres[index_sp1].id]) {
+                node_lines[spheres[index_sp1].id] = [];
+            }
+
+            node_lines[spheres[index_sp1].id].push(line);
+
+            if (!node_lines[spheres[index_sp2].id]) {
+                node_lines[spheres[index_sp2].id] = [];
+            }
+
+            node_lines[spheres[index_sp2].id].push(line);
+
+
+        }
+
+  
+
+ 
+}
+
+    shape_creation = !shape_creation;
+}
+
+function clearScene() {
+
+
+    for (let o = groups_data.length - 1; o >= 0; o--) {
+
+        const { group, newItem } = groups_data[o];
+        scene.remove(group);
+        newItem.remove();
+
+    }
+
+    spheres.forEach(sphere => {
+        scene.remove(sphere); // Supprime l'élément `line` de la scène
+    });
+
+    lines.forEach(line => {
+        scene.remove(line); // Supprime l'élément `line` de la scène
+    });
+
+    for (let i = 0; i < textMeshes.length; i++) {
+        // Retirer le TextMesh de la scène
+        scene.remove(textMeshes[i]);
+
+        // Optionnel : Libérer la mémoire en supprimant la géométrie et le matériau
+        textMeshes[i].geometry.dispose();
+        textMeshes[i].material.dispose();
+        
+    }
+
+    for (let i = 0; i < sprites.length; i++) {
+        // Retirer le TextMesh de la scène
+        scene.remove(sprites[i]);
+
+        // Optionnel : Libérer la mémoire en supprimant la géométrie et le matériau
+        sprites[i].geometry.dispose();
+        sprites[i].material.dispose();
+        
+    }
+
+    for (let i = 0; i < linedata.length; i++) {
+        // Retirer le TextMesh de la scène
+
+        if (linedata[i].textmesh) {
+
+            scene.remove(linedata[i].textmesh)
+
+        }
+        
+    }
+
+
+
+    // Clear the arrays
+    groups_data = [];
+    group_data_cube = [];
+    group_data_cube_float = [];
+    sprites = [];
+    spheres = [];
+    node_lines = [];
+    lines =[];
+    linedata=[];
+    textMeshes = [];
+    itemCounter_sp=0;
+    selectedItem_2 = null;
+    selectedObject_2=null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </script>
+</body>
+</html>
